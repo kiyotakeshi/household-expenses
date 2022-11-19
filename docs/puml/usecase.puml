@@ -1,0 +1,76 @@
+'ユースケース図
+'ユーザの要求に対するシステムの振る舞いを定義する図
+'アクターが「○○を××する」の形式で記載する
+@startuml
+left to right direction
+actor "親" as actor1
+rectangle "育児費用記録システム"{
+    package "家族(family)管理" {
+        usecase "メンバー(member)を登録できる" as usecase1
+        usecase "記録をつけるデフォルトのメンバーを設定できる" as usecase2
+        usecase "(低)家族にメンバーを追加できる" as usecase3
+        usecase "(低)家族からメンバーを削除できる" as usecase4
+    }
+    package "記録(transaction)" {
+        usecase "メンバーの使用した支出(expense)を「金額、カテゴリー(選択式で1つ)、メモ、日付」を指定して記録できる" as usecase5
+        usecase "直近で記録した(latest)支出5件のリストを確認できる" as usecase6
+        usecase "ある支出の記録を選択すると、その支出の編集ができる" as usecase7
+        usecase "支出の「メンバー、金額、カテゴリー、メモ、日付」を指定して変更できる" as usecase8
+        usecase "(低)1週間ごとの支出の合計金額を5週間分確認できる" as usecase9
+        usecase "月ごとの支出の合計金額を12ヶ月分確認できる" as usecase10
+        usecase "1日の支出の合計金額が記載されたカレンダーで1ヶ月の支出が確認できる" as usecase11
+        usecase "カレンダーを前の月(or 次の月)に切り替えてその月の支出が確認できる" as usecase12
+        usecase "カレンダーのある日を選択するとその日の支出の記録一覧を確認できる" as usecase13
+        usecase "ある支出をコピーすると同じ内容で今日の日付のものが編集状態で作られる(save しない限り記録はされない)" as usecase14
+        usecase "支出を記録する際、continue で確定すると、続けて次の支出の記録に移れる" as usecase15
+        usecase "ある支出をブックマークに追加できる" as usecase16
+        usecase "ブックマークから支出を選択すると、今日の日付のものが編集状態で作られる(save しない限り記録はされない)" as usecase17
+        usecase "ある支出を削除できる" as usecase18
+        usecase "(低)ある支出を繰り返し設定(repeat)に登録できる、繰り返しの間隔を変更できる" as usecase19
+        usecase "(低)支出に画像を添付する" as usecase20
+    }
+    package "(低)繰り返し設定管理" {
+        usecase "繰り返し設定されている支出の一覧を確認できる" as usecase21
+        usecase "繰り返し設定する支出を新規追加できる(繰り返しの間隔の設定画面に遷移)" as usecase22
+    }
+    package "カテゴリー設定管理" {
+        usecase "カテゴリーの一覧を確認できる" as usecase23
+        usecase "カテゴリーの順番を並び替えできる" as usecase24
+        usecase "カテゴリーを削除できる(紐づいていた支出のカテゴリーは空になる)" as usecase25
+    }
+    package "統計(stats)" {
+        usecase "月ごとにカテゴリー別の支出を確認できる" as usecase26
+        usecase "年間のカテゴリー別の支出を確認できる" as usecase27
+        usecase "(低)期間を指定してカテゴリー別の支出を確認できる" as usecase28
+        usecase "カテゴリーを選択すると表示されていた期間で記録された支出の一覧を確認できる" as usecase29
+    }
+}
+actor1 --- usecase1
+actor1 --- usecase2
+actor1 --- usecase3
+actor1 --- usecase5
+actor1 --- usecase6
+actor1 --- usecase7
+actor1 --- usecase8
+actor1 --- usecase9
+actor1 --- usecase10
+actor1 --- usecase11
+actor1 --- usecase12
+actor1 --- usecase13
+actor1 --- usecase14
+actor1 --- usecase15
+actor1 --- usecase16
+actor1 --- usecase17
+actor1 --- usecase18
+actor1 --- usecase19
+actor1 --- usecase20
+actor1 --- usecase21
+actor1 --- usecase22
+actor1 --- usecase23
+actor1 --- usecase24
+actor1 --- usecase25
+actor1 --- usecase26
+actor1 --- usecase27
+actor1 --- usecase28
+actor1 --- usecase29
+@enduml
