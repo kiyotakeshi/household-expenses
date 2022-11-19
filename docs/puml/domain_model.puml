@@ -1,0 +1,63 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+left to right direction
+
+hide circle
+'hide method
+
+package DomainModel {
+
+    class family {
+        id
+    }
+
+    class member {
+        id
+        name
+        birthday
+    }
+    note bottom of member
+        attribute は今のところ使用予定がないので nullable
+    end note
+
+    class expense {
+        id
+        categoryId
+        memberId
+'        attachmentId
+        price
+        memo
+        date
+        repeatable
+        frequency
+    }
+    note bottom of expense
+        repeatable が true のものは frequency を持つ
+    end note
+
+' 添付ファイルに固有の情報を持たせるかは検討
+'    class attachment {
+'        id
+'        content
+'    }
+
+    class category {
+        id
+        name
+        rank
+    }
+
+    class bookmark {
+        id
+        expenseId
+    }
+
+    ' https://plantuml.com/ja/class-diagram#fbbc0504d940020e
+    member "0..*" -- "0..1" family
+    expense "0..*" -- "1..*" member
+    category "1" -- "1..*" expense
+    bookmark "0..1" -- "1" expense
+}
+
+@enduml
