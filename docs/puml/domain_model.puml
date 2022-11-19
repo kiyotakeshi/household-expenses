@@ -8,32 +8,41 @@ hide circle
 
 package DomainModel {
 
-    class family {
-        id
+    class Family {
+        int id
+        String name
     }
 
-    class member {
-        id
-        name
-        birthday
+    class Member {
+        int id
+        String? name
+        LocalDate? birthday
     }
-    note bottom of member
+    note bottom of Member
         attribute は今のところ使用予定がないので nullable
     end note
 
-    class expense {
-        id
-        categoryId
-        memberId
+    class Expense {
+        int id
+        Category Category
+        Member member
 '        attachmentId
-        price
-        memo
-        date
-        repeatable
-        frequency
+        int price
+        String? memo
+        LocalDate date
+        Repeatable? frequency
     }
-    note bottom of expense
+    note bottom of Expense
         repeatable が true のものは frequency を持つ
+    end note
+
+    class Repeatable {
+        int month
+        int count
+    }
+    note bottom of Repeatable
+        ・1ヶ月に1回だと `month:1, count:1` となる
+        ・1週間に1回だと `month:1, count:4` となる
     end note
 
 ' 添付ファイルに固有の情報を持たせるかは検討
@@ -42,22 +51,23 @@ package DomainModel {
 '        content
 '    }
 
-    class category {
-        id
-        name
-        rank
+    class Category {
+        int id
+        String name
+        int rank
     }
 
-    class bookmark {
-        id
-        expenseId
+    class Bookmark {
+        int id
+        Expense expense
     }
 
     ' https://plantuml.com/ja/class-diagram#fbbc0504d940020e
-    member "0..*" -- "0..1" family
-    expense "0..*" -- "1..*" member
-    category "1" -- "1..*" expense
-    bookmark "0..1" -- "1" expense
+    Member "0..*" -- "0..1" Family
+    Expense "0..*" -- "1" Member
+    Category "1" -- "1..*" Expense
+    Bookmark "0..1" -- "1" Expense
+    Repeatable "0..1" -- "1" Expense
 }
 
 @enduml
