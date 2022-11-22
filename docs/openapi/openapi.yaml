@@ -37,6 +37,7 @@ components:
         - id
         # TODO: category の情報も返すようにする
         - category_id
+        - name
         - price
         - memo
         - date
@@ -50,12 +51,15 @@ components:
         category_id:
           type: integer
           example: 1
+        name:
+          type: string
+          example: '粉ミルク'
         price:
           type: integer
           example: 500
         memo:
           type: string
-          example: '粉ミルク'
+          example: '200gの缶のもの'
           nullable: true
         date:
           type: string

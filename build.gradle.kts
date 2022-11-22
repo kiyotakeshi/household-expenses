@@ -28,7 +28,10 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	runtimeOnly("com.h2database:h2")
 	runtimeOnly("org.postgresql:postgresql")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("io.mockk:mockk:1.13.2")
+
 	jooqGenerator("org.postgresql:postgresql")
 	jooqGenerator("jakarta.xml.bind:jakarta.xml.bind-api:3.0.1")
 }
