@@ -23,6 +23,25 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "get expenses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:{{PORT}}/api/expenses",
+					"host": [
+						"localhost"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"expenses"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
