@@ -1,0 +1,17 @@
+# https://spring.pleiades.io/spring-boot/docs/current/reference/html/application-properties.html
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE
+    username: sa
+    password:
+  sql:
+    init:
+      mode: embedded
+      schema-locations: classpath:db/schema.sql
+      data-locations: classpath:db/data.sql
+
+  flyway:
+    enabled: false
+  jooq:
+    sql-dialect: h2

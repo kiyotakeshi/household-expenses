@@ -27,6 +27,7 @@ package DomainModel {
         Category Category
         Member member
 '        attachmentId
+        String name
         int price
         String? memo
         LocalDate date
