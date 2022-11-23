@@ -45,6 +45,7 @@ create table if not exists expenses
     id               integer not null default nextval('expense_id_seq') primary key,
     category_id      integer not null,
     member_id        integer not null,
+    name             varchar(510),
     price            integer not null,
     memo             varchar(510),
     -- not keyword
