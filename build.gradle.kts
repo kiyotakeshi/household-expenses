@@ -44,6 +44,9 @@ jooq {
 
 	configurations {
 		create("main") {
+			// ref https://github.com/etiennestuder/gradle-jooq-plugin#generating-the-jooq-sources
+			// ref https://www.greptips.com/posts/1350/#jooq-configurations
+            generateSchemaSourceOnCompilation.set(false)
 			jooqConfiguration.apply {
 				jdbc.apply {
 					driver = "org.postgresql.Driver"
@@ -79,6 +82,14 @@ jooq {
 		}
 	}
 }
+
+// test の task 実行時に generateJooq を実行しないための設定
+// 実際は、 `generateSchemaSourceOnCompilation.set(false)` で無効にできたため不要
+//tasks {
+//    test {
+//        findByName("generateJooq")?.enabled = false
+//    }
+//}
 
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
