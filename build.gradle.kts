@@ -33,6 +33,7 @@ dependencies {
 	testImplementation("io.mockk:mockk:1.13.2")
 
 	jooqGenerator("org.postgresql:postgresql")
+	// https://github.com/etiennestuder/gradle-jooq-plugin/issues/207
 	jooqGenerator("jakarta.xml.bind:jakarta.xml.bind-api:3.0.1")
 }
 

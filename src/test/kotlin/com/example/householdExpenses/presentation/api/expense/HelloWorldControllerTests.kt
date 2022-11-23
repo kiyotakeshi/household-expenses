@@ -13,11 +13,17 @@ import org.springframework.test.web.servlet.get
 /**
  * https://kotlinlang.org/docs/kotlin-doc.html#links-to-elements
  * [com.example.householdExpenses.presentation.api.expense.HelloWorldController]
+ *
+ * MVC slice test
+ * https://spring.pleiades.io/spring-boot/docs/current/reference/html/features.html#features.testing.spring-boot-applications.spring-mvc-tests
+ * https://spring.pleiades.io/spring-boot/docs/current/reference/html/test-auto-configuration.html#appendix.test-auto-configuration
  * @author kiyota
  */
-@SpringBootTest
+//@SpringBootTest
+@WebMvcTest(HelloWorldController::class)
 @AutoConfigureMockMvc
-internal class HelloWorldControllerTests @Autowired constructor(
+internal class HelloWorldControllerTests(
+    @Autowired
     val mockMvc: MockMvc
 ) {
     @Test

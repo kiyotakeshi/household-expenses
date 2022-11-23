@@ -10,11 +10,11 @@
 -- drop sequence member_id_seq;
 -- drop sequence family_id_seq;
 
-create sequence expense_id_seq start with 1;
-create sequence category_id_seq start with 1;
-create sequence bookmark_id_seq start with 1;
-create sequence member_id_seq start with 1;
-create sequence family_id_seq start with 1;
+create sequence if not exists expense_id_seq start with 1;
+create sequence if not exists category_id_seq start with 1;
+create sequence if not exists bookmark_id_seq start with 1;
+create sequence if not exists member_id_seq start with 1;
+create sequence if not exists family_id_seq start with 1;
 
 create table if not exists categories
 (

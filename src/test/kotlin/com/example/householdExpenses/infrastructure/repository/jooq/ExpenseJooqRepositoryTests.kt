@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Import
  * @author kiyota
  */
 @JooqTest
-internal class ExpenseJooqRepositoryTests @Autowired constructor(sut: ExpenseJooqRepository) {
+internal class ExpenseJooqRepositoryTests (@Autowired sut: ExpenseJooqRepository) {
     private val sut: ExpenseJooqRepository
 
     init {
