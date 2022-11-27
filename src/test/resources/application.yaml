@@ -13,5 +13,9 @@ spring:
 
   flyway:
     enabled: false
-  jooq:
-    sql-dialect: h2
+logging:
+  level:
+    org:
+      jooq:
+        tools:
+          LoggerListener: DEBUG
