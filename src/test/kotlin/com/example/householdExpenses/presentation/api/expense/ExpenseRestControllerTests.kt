@@ -52,15 +52,15 @@ internal class ExpenseRestControllerTests(
                 content {
                     contentType(MediaType.APPLICATION_JSON)
                 }
-                jsonPath("$") { isArray() }
-                jsonPath("$[0].name") { value("粉ミルク")}
-                jsonPath("$[0].price") { value(500)}
-                jsonPath("$[0].memo") { value("200gの缶のもの")}
-                jsonPath("$[0].category_name") { value("食費")}
-                jsonPath("$[0].date") { value(LocalDate.of(2022,11,23).toString())}
-                jsonPath("$[1].name") { value("おしゃぶり")}
-                jsonPath("$[1].category_name") { value("消耗品")}
-                jsonPath("$[2].name") { value("おやつ")}
+                jsonPath("$['expenses']") { isArray() }
+                jsonPath("$['expenses'].[0].name") { value("粉ミルク")}
+                jsonPath("$['expenses'].[0].price") { value(500)}
+                jsonPath("$['expenses'].[0].memo") { value("200gの缶のもの")}
+                jsonPath("$['expenses'].[0].category_name") { value("食費")}
+                jsonPath("$['expenses'].[0].date") { value(LocalDate.of(2022,11,23).toString())}
+                jsonPath("$['expenses'].[1].name") { value("おしゃぶり")}
+                jsonPath("$['expenses'].[1].category_name") { value("消耗品")}
+                jsonPath("$['expenses'].[2].name") { value("おやつ")}
             }
 
         verify(exactly = 1) { getExpensesUsecase.getExpenses() }

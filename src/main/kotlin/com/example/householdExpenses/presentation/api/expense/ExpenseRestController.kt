@@ -15,22 +15,24 @@ import org.springframework.web.bind.annotation.RestController
 class ExpenseRestController(private val getExpensesUsecase: GetExpensesUsecase) {
 
     @GetMapping
-    fun getExpenses(): ResponseEntity<List<ExpenseResponseDto>> {
+    fun getExpenses(): ResponseEntity<ExpenseListResponseDto> {
         val expenses: List<Expense> = getExpensesUsecase.getExpenses()
 
-        val response: List<ExpenseResponseDto> = expenses.map {
-            ExpenseResponseDto(
-                id = it.id,
-                category_name = it.category.name,
-                member_id = it.member_id,
-                name = it.name,
-                price = it.price,
-                memo = it.memo,
-                date = it.date,
-                repeatable_month = it.repeatable_month,
-                repeatable_count = it.repeatable_count
-            )
-        }.toList()
+        val response = ExpenseListResponseDto(
+            expenses.map {
+                ExpenseResponseDto(
+                    id = it.id,
+                    category_name = it.category.name,
+                    member_id = it.member_id,
+                    name = it.name,
+                    price = it.price,
+                    memo = it.memo,
+                    date = it.date,
+                    repeatable_month = it.repeatable_month,
+                    repeatable_count = it.repeatable_count
+                )
+            }.toList()
+        )
 
         return ResponseEntity.ok(response)
     }

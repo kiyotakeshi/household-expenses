@@ -28,15 +28,14 @@ paths:
                   expenses:
                     type: array
                     items:
-                      $ref: '#/components/schemas/expense'
+                      $ref: '#/components/schemas/expenseResponseDto'
 components:
   schemas:
-    expense:
+    expenseResponseDto:
       type: object
       required:
         - id
-        # TODO: category の情報も返すようにする
-        - category_id
+        - category_name
         - name
         - price
         - memo
@@ -48,9 +47,9 @@ components:
         id:
           type: integer
           example: 1
-        category_id:
-          type: integer
-          example: 1
+        category_name:
+          type: string
+          example: '食費'
         name:
           type: string
           example: '粉ミルク'
