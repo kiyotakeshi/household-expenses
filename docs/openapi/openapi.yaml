@@ -21,14 +21,9 @@ paths:
           content:
             application/vnd.api+json:
               schema:
-                type: object
-                required:
-                  - expenses
-                properties:
-                  expenses:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/expenseResponseDto'
+                type: array
+                items:
+                  $ref: '#/components/schemas/expenseResponseDto'
 components:
   schemas:
     expenseResponseDto:

@@ -31,15 +31,15 @@ internal class ExpenseIntegrationTests @Autowired constructor(
                     contentType(MediaType.APPLICATION_JSON)
                 }
                 // ID は DB にて採番されるため
-                jsonPath("$['expenses'].[0].id") { value(1)}
-                jsonPath("$['expenses'].[0].name") { value(Fixtures.ExpenseA().name)}
-                jsonPath("$['expenses'].[0].price") { value(Fixtures.ExpenseA().price)}
-                jsonPath("$['expenses'].[0].memo") { value(Fixtures.ExpenseA().memo)}
-                jsonPath("$['expenses'].[0].date") { value(Fixtures.ExpenseA().date.toString())}
-                jsonPath("$['expenses'].[0].category_name") { value(Fixtures.ExpenseA().category.name)}
-                jsonPath("$['expenses'].[1].name") { value(Fixtures.ExpenseB().name)}
-                jsonPath("$['expenses'].[1].category_name") { value(Fixtures.ExpenseB().category.name)}
-                jsonPath("$['expenses'].[2].name") { value(Fixtures.ExpenseC().name)}
+                jsonPath("$[0].id") { value(1)}
+                jsonPath("$[0].name") { value(Fixtures.ExpenseA().name)}
+                jsonPath("$[0].price") { value(Fixtures.ExpenseA().price)}
+                jsonPath("$[0].memo") { value(Fixtures.ExpenseA().memo)}
+                jsonPath("$[0].date") { value(Fixtures.ExpenseA().date.toString())}
+                jsonPath("$[0].category_name") { value(Fixtures.ExpenseA().category.name)}
+                jsonPath("$[1].name") { value(Fixtures.ExpenseB().name)}
+                jsonPath("$[1].category_name") { value(Fixtures.ExpenseB().category.name)}
+                jsonPath("$[2].name") { value(Fixtures.ExpenseC().name)}
             }
     }
 }
