@@ -1,21 +1,16 @@
 package com.example.householdExpenses.presentation.api.expense
 
-import com.example.householdExpenses.domain.expense.Expense
-import com.example.householdExpenses.domain.expense.ExpenseRepository
+import com.example.householdExpenses.domain.expense.ExpenseFixture
 import com.example.householdExpenses.usecase.expense.GetExpensesUsecase
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.mockkObject
 import io.mockk.verify
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.TestConfiguration
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.context.annotation.Bean
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
@@ -48,20 +43,7 @@ internal class ExpenseRestControllerTests(
 
     @Test
     fun getExpenses() {
-        val expense1 = Expense(
-            id = 1,
-            category_id = 1,
-            member_id = 1,
-            name = "粉ミルク",
-            price = 500,
-            memo = "200gの缶のもの",
-            date = LocalDate.of(2022, 11, 23),
-            repeatable_month = 1,
-            repeatable_count = 1
-        )
-        val expense2 = Expense(2, 5, 1, "おしゃぶり", 300, null, LocalDate.of(2022, 11, 23), 0, 0)
-
-        every { getExpensesUsecase.getExpenses() } returns listOf(expense1, expense2)
+        every { getExpensesUsecase.getExpenses() } returns listOf(ExpenseFixture.ExpenseA(), ExpenseFixture.ExpenseB())
 
         mockMvc.get("/api/expenses")
             .andDo { print() }
@@ -71,7 +53,6 @@ internal class ExpenseRestControllerTests(
                     contentType(MediaType.APPLICATION_JSON)
                 }
                 jsonPath("$") { isArray() }
-                jsonPath("$[0].id") { value(1)}
                 jsonPath("$[0].name") { value("粉ミルク")}
                 jsonPath("$[0].price") { value(500)}
                 jsonPath("$[0].memo") { value("200gの缶のもの")}

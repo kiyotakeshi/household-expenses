@@ -9,8 +9,7 @@ import java.time.LocalDate
 class ExpenseMockRepository : ExpenseRepository {
 
     private val expenses = listOf(
-        Expense(
-            id = 1,
+        Expense.create(
             category_id = 1,
             member_id = 1,
             name = "粉ミルク",
@@ -20,8 +19,8 @@ class ExpenseMockRepository : ExpenseRepository {
             repeatable_month = 1,
             repeatable_count = 1
         ),
-        Expense(2, 5, 1, "おしゃぶり", 300, null, LocalDate.of(2022, 11, 23), 0, 0),
-        Expense(3, 1, 2, "おやつ", 150, null, LocalDate.of(2022, 11, 23), 0, 0)
+        Expense.create(5, 1, "おしゃぶり", 300, null, LocalDate.of(2022, 11, 23), 0, 0),
+        Expense.create(1, 2, "おやつ", 150, null, LocalDate.of(2022, 11, 23), 0, 0)
     )
 
     override fun getExpenses(): List<Expense> = expenses

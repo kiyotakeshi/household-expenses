@@ -17,8 +17,9 @@ class ExpenseJooqRepository(private val create: DSLContext) : ExpenseRepository 
         val expensesRecords: Result<ExpensesRecord> = create.selectFrom(EXPENSES)
             .fetch()
 
+        // constraint fk_member_family_6a592267 みたいな命名のほうが jOOQ で使いやすい
         return expensesRecords.map {
-            Expense(
+            Expense.reconstruct(
                 it.id!!, it.categoryId!!, it.memberId!!,
                 it.name!!, it.price!!, it.memo, it.date!!, it.repeatableMonth!!, it.repeatableCount!!
             )
