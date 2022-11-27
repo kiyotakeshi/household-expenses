@@ -12,5 +12,5 @@ VALUES (1, null, '豆', '2022-11-22'),
 
 INSERT INTO expenses (id, category_id, member_id, name, price, memo, date, repeatable_month, repeatable_count)
 VALUES (1, 1, 1, '粉ミルク', 500, '200gの缶のもの', '2022-11-23', 1, 1),
-       (2, 1, 1, 'おやつ', 200, null, '2022-11-23', 0, 0),
-       (3, 2, 2, 'おしゃぶり', 300, null, '2022-11-22', 0, 0);
+       (2, 2, 1, 'おしゃぶり', 300, null, '2022-11-24', 0, 0),
+       (3, 1, 2, 'おやつ', 150, null, '2022-11-23', 0, 0);

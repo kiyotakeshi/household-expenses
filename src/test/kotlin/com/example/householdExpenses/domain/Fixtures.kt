@@ -29,7 +29,7 @@ class Fixtures {
         }
 
         fun ExpenseB(): Expense {
-            return Expense.create(CategoryB(), 1, "おしゃぶり", 300, null, LocalDate.of(2022, 11, 23), 0, 0)
+            return Expense.create(CategoryB(), 1, "おしゃぶり", 300, null, LocalDate.of(2022, 11, 24), 0, 0)
         }
 
         fun ExpenseC(): Expense {

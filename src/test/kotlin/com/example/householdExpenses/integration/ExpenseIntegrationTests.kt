@@ -1,5 +1,6 @@
 package com.example.householdExpenses.integration
 
+import com.example.householdExpenses.domain.Fixtures
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -29,11 +30,16 @@ internal class ExpenseIntegrationTests @Autowired constructor(
                 content {
                     contentType(MediaType.APPLICATION_JSON)
                 }
+                // ID は DB にて採番されるため
                 jsonPath("$[0].id") { value(1)}
-                jsonPath("$[0].name") { value("粉ミルク")}
-                jsonPath("$[0].price") { value(500)}
-                jsonPath("$[0].memo") { value("200gの缶のもの")}
-                jsonPath("$[0].date") { value(LocalDate.of(2022,11,23).toString())}
+                jsonPath("$[0].name") { value(Fixtures.ExpenseA().name)}
+                jsonPath("$[0].price") { value(Fixtures.ExpenseA().price)}
+                jsonPath("$[0].memo") { value(Fixtures.ExpenseA().memo)}
+                jsonPath("$[0].date") { value(Fixtures.ExpenseA().date.toString())}
+                jsonPath("$[0].category_name") { value(Fixtures.ExpenseA().category.name)}
+                jsonPath("$[1].name") { value(Fixtures.ExpenseB().name)}
+                jsonPath("$[1].category_name") { value(Fixtures.ExpenseB().category.name)}
+                jsonPath("$[2].name") { value(Fixtures.ExpenseC().name)}
             }
     }
 }
