@@ -1,16 +1,17 @@
 package com.example.householdExpenses.domain.expense
 
+import com.example.householdExpenses.domain.category.Category
 import java.time.LocalDate
 
 /**
  * @author kiyota
  */
 class Expense private constructor(
-    id: Int?, category_id: Int, member_id: Int, name: String, price: Int, memo: String?,
+    id: Int?, category: Category, member_id: Int, name: String, price: Int, memo: String?,
     date: LocalDate, repeatable_month: Int, repeatable_count: Int
 ) {
     var id: Int? = id
-    val category_id =  category_id
+    val category: Category = category
     val member_id = member_id
     val name = name
     val price = price
@@ -22,16 +23,16 @@ class Expense private constructor(
     companion object {
 
         fun create(
-            category_id: Int, member_id: Int, name: String, price: Int, memo: String?,
+            category: Category, member_id: Int, name: String, price: Int, memo: String?,
             date: LocalDate, repeatable_month: Int, repeatable_count: Int
         ): Expense {
-            return Expense(null, category_id, member_id, name, price, memo, date, repeatable_month, repeatable_count)
+            return Expense(null, category, member_id, name, price, memo, date, repeatable_month, repeatable_count)
         }
         fun reconstruct(
-            id: Int, category_id: Int, member_id: Int, name: String, price: Int, memo: String?,
+            id: Int, category: Category, member_id: Int, name: String, price: Int, memo: String?,
             date: LocalDate, repeatable_month: Int, repeatable_count: Int
         ): Expense {
-            return Expense(id, category_id, member_id, name, price, memo, date, repeatable_month, repeatable_count)
+            return Expense(id, category, member_id, name, price, memo, date, repeatable_month, repeatable_count)
         }
     }
 }

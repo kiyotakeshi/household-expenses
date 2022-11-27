@@ -1,6 +1,6 @@
 package com.example.householdExpenses.presentation.api.expense
 
-import com.example.householdExpenses.domain.expense.ExpenseFixture
+import com.example.householdExpenses.domain.Fixtures
 import com.example.householdExpenses.usecase.expense.GetExpensesUsecase
 import io.mockk.every
 import io.mockk.mockk
@@ -43,7 +43,7 @@ internal class ExpenseRestControllerTests(
 
     @Test
     fun getExpenses() {
-        every { getExpensesUsecase.getExpenses() } returns listOf(ExpenseFixture.ExpenseA(), ExpenseFixture.ExpenseB())
+        every { getExpensesUsecase.getExpenses() } returns listOf(Fixtures.ExpenseA(), Fixtures.ExpenseB(), Fixtures.ExpenseC())
 
         mockMvc.get("/api/expenses")
             .andDo { print() }
@@ -56,8 +56,10 @@ internal class ExpenseRestControllerTests(
                 jsonPath("$[0].name") { value("粉ミルク")}
                 jsonPath("$[0].price") { value(500)}
                 jsonPath("$[0].memo") { value("200gの缶のもの")}
+                jsonPath("$[0].category.name") { value("食費")}
                 jsonPath("$[0].date") { value(LocalDate.of(2022,11,23).toString())}
                 jsonPath("$[1].name") { value("おしゃぶり")}
+                jsonPath("$[2].name") { value("おやつ")}
             }
 
         verify(exactly = 1) { getExpensesUsecase.getExpenses() }
