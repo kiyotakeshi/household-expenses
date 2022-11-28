@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.get
 import java.time.LocalDate
 
 /**
+ * この layer のテストは積極的には書かないでおく、 Integration test でカバーする
  * [com.example.householdExpenses.presentation.api.expense.ExpenseRestController]
  * @author kiyota
  */

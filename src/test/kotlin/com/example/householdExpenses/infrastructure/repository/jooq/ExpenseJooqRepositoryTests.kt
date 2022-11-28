@@ -11,10 +11,11 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
 
 /**
+ * [com.example.householdExpenses.infrastructure.repository.jooq]
  * @author kiyota
  */
 @JooqTest
-internal class ExpenseJooqRepositoryTests (@Autowired sut: ExpenseJooqRepository) {
+internal class ExpenseJooqRepositoryTests(@Autowired sut: ExpenseJooqRepository) {
     private val sut: ExpenseJooqRepository
 
     init {
@@ -30,8 +31,6 @@ internal class ExpenseJooqRepositoryTests (@Autowired sut: ExpenseJooqRepository
     }
 
     @Configuration
-    @Import(
-        ExpenseJooqRepository::class
-    )
+    @Import(ExpenseJooqRepository::class)
     internal class LocalTestContext
 }

@@ -47,8 +47,7 @@ class ExpenseJooqRepository(private val create: DSLContext) : ExpenseRepository 
                 repeatable_month = it.getValue(e.REPEATABLE_MONTH)!!,
                 repeatable_count = it.getValue(e.REPEATABLE_COUNT)!!
             )
-        }
-            .toList()
+        }.toList()
 
         return expenses
     }
