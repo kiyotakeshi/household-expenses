@@ -18,12 +18,12 @@ import java.time.LocalDate
  */
 @SpringBootTest
 @AutoConfigureMockMvc
-internal class ExpenseIntegrationTests @Autowired constructor(
+internal class CategoryIntegrationTests @Autowired constructor(
     val mockMvc: MockMvc
 ) {
     @Test
-    internal fun getExpenses(){
-        mockMvc.get("/api/expenses")
+    internal fun getCategories(){
+        mockMvc.get("/api/categories")
             .andDo { print() }
             .andExpect {
                 status { isOk() }
@@ -32,14 +32,9 @@ internal class ExpenseIntegrationTests @Autowired constructor(
                 }
                 // ID は DB にて採番されるため
                 jsonPath("$[0].id") { value(1)}
-                jsonPath("$[0].name") { value(Fixtures.ExpenseA().name)}
-                jsonPath("$[0].price") { value(Fixtures.ExpenseA().price)}
-                jsonPath("$[0].memo") { value(Fixtures.ExpenseA().memo)}
-                jsonPath("$[0].date") { value(Fixtures.ExpenseA().date.toString())}
-                jsonPath("$[0].category_name") { value(Fixtures.ExpenseA().category.name)}
-                jsonPath("$[1].name") { value(Fixtures.ExpenseB().name)}
-                jsonPath("$[1].category_name") { value(Fixtures.ExpenseB().category.name)}
-                jsonPath("$[2].name") { value(Fixtures.ExpenseC().name)}
+                jsonPath("$[0].name") { value(Fixtures.CategoryA().name)}
+                jsonPath("$[0].rank") { value(Fixtures.CategoryA().rank)}
+                jsonPath("$[1].name") { value(Fixtures.CategoryB().name)}
             }
     }
 }

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 internal class GetExpensesUsecaseTests {
 
     private val expenseRepository: ExpenseRepository = mockk(relaxed = true)
-    private val sut = GetExpensesUsecase(expenseRepository);
+    private val sut = GetExpensesUsecase(expenseRepository)
 
     @Test
     fun `should call its repository to retrieve expenses`() {

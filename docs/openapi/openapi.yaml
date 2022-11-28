@@ -21,22 +21,34 @@ paths:
           content:
             application/vnd.api+json:
               schema:
-                type: object
-                required:
-                  - expenses
-                properties:
-                  expenses:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/expense'
+                type: array
+                items:
+                  $ref: '#/components/schemas/expenseResponseDto'
+
+  # category
+  /categories:
+    get:
+      tags:
+        - 'categories'
+      summary: 'カテゴリーの一覧取得'
+      description: 'カテゴリー一覧を返す'
+      responses:
+        '200':
+          description: '正常'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/categoryResponseDto'
+
 components:
   schemas:
-    expense:
+    expenseResponseDto:
       type: object
       required:
         - id
-        # TODO: category の情報も返すようにする
-        - category_id
+        - category_name
         - name
         - price
         - memo
@@ -48,9 +60,9 @@ components:
         id:
           type: integer
           example: 1
-        category_id:
-          type: integer
-          example: 1
+        category_name:
+          type: string
+          example: '食費'
         name:
           type: string
           example: '粉ミルク'
@@ -79,4 +91,20 @@ components:
             1ヶ月に1回だと **1** となる
           example: 1
           nullable: true
-        
+
+    categoryResponseDto:
+      type: object
+      required:
+        - id
+        - name
+        - rank
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: '食費'
+        rank:
+          type: integer
+          example: 1
