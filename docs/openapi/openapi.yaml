@@ -24,6 +24,24 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/expenseResponseDto'
+
+  # category
+  /categories:
+    get:
+      tags:
+        - 'categories'
+      summary: 'カテゴリーの一覧取得'
+      description: 'カテゴリー一覧を返す'
+      responses:
+        '200':
+          description: '正常'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/categoryResponseDto'
+
 components:
   schemas:
     expenseResponseDto:
@@ -73,4 +91,20 @@ components:
             1ヶ月に1回だと **1** となる
           example: 1
           nullable: true
-        
+
+    categoryResponseDto:
+      type: object
+      required:
+        - id
+        - name
+        - rank
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: '食費'
+        rank:
+          type: integer
+          example: 1

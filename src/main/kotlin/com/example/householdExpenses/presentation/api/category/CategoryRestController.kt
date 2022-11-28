@@ -15,9 +15,13 @@ import org.springframework.web.bind.annotation.RestController
 class CategoryRestController(private val getCategoriesUsecase: GetCategoriesUsecase) {
 
     @GetMapping
-    fun getCategories(): ResponseEntity<List<Category>> {
+    fun getCategories(): ResponseEntity<List<CategoryResponseDto>> {
         val categories: List<Category> = getCategoriesUsecase.getCategories()
 
-        return ResponseEntity.ok(categories)
+        val response = categories.map {
+            CategoryResponseDto(id = it.id, name = it.name, rank = it.rank)
+        }.toList()
+
+        return ResponseEntity.ok(response)
     }
 }

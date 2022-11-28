@@ -11,7 +11,6 @@ class Category private constructor(
     val rank = rank
 
     companion object {
-
         fun create(name: String, rank: Int): Category {
             return Category(null, name, rank)
         }
