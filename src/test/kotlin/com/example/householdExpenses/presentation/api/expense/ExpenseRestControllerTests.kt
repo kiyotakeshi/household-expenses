@@ -6,6 +6,7 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -18,12 +19,15 @@ import org.springframework.test.web.servlet.get
 import java.time.LocalDate
 
 /**
- * この layer のテストは積極的には書かないでおく、 Integration test でカバーする
  * [com.example.householdExpenses.presentation.api.expense.ExpenseRestController]
+ * expense の id は DB にて採番するため、インスタンスの生成時には id を指定しない
+ * Fixture の生成時にも id を指定できないようにしているのでこのテストは Disabled にする
+ * この layer のテストは積極的には書かないでおく、 Integration test でカバーする
  * @author kiyota
  */
 @WebMvcTest(ExpenseRestController::class)
 @AutoConfigureMockMvc
+@Disabled
 internal class ExpenseRestControllerTests(
     @Autowired
     val mockMvc: MockMvc,

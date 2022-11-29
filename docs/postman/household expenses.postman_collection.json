@@ -42,6 +42,25 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "get categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:{{PORT}}/api/categories",
+					"host": [
+						"localhost"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"categories"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
