@@ -1,6 +1,7 @@
 package com.example.householdExpenses.presentation.api.expense
 
 import com.example.householdExpenses.domain.expense.Expense
+import com.example.householdExpenses.model.ExpenseResponseDto
 import com.example.householdExpenses.usecase.expense.GetExpensesUsecase
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -20,15 +21,14 @@ class ExpenseRestController(private val getExpensesUsecase: GetExpensesUsecase) 
 
         val response = expenses.map {
             ExpenseResponseDto(
-                id = it.id,
-                category_name = it.category.name,
-                member_id = it.member_id,
+                id = it.id!!,
+                categoryName = it.category.name,
                 name = it.name,
                 price = it.price,
                 memo = it.memo,
                 date = it.date,
-                repeatable_month = it.repeatable_month,
-                repeatable_count = it.repeatable_count
+                repeatableMonth = it.repeatableMonth,
+                repeatableCount = it.repeatableCount
             )
         }.toList()
 

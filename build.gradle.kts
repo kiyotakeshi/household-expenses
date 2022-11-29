@@ -1,10 +1,13 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.openapitools.codegen.languages.KotlinClientCodegen.DateLibrary
+import org.openapitools.codegen.languages.KotlinClientCodegen.MOSHI_CODE_GEN
 
 plugins {
 	id("org.springframework.boot") version "2.7.5"
 	id("io.spring.dependency-management") version "1.0.15.RELEASE"
 	// https://github.com/etiennestuder/gradle-jooq-plugin#compatibility
 	id("nu.studer.jooq") version "8.0"
+	id("org.openapi.generator") version "6.2.1"
 	kotlin("jvm") version "1.6.21"
 	kotlin("plugin.spring") version "1.6.21"
 }
@@ -50,9 +53,10 @@ jooq {
 			jooqConfiguration.apply {
 				jdbc.apply {
 					driver = "org.postgresql.Driver"
-//					url = System.getenv("POSTGRES_URL")
-//					user = System.getenv("POSTGRES_USER")
-//					password = System.getenv("POSTGRES_PASSWORD")
+					// TODO: 環境変数から読み取るようにし、direnv 等で設定する
+					// url = System.getenv("POSTGRES_URL")
+					// user = System.getenv("POSTGRES_USER")
+					// password = System.getenv("POSTGRES_PASSWORD")
 					url = "jdbc:postgresql://localhost:5432/household-expenses"
 					user = "postgres"
 					password = "password"
@@ -91,7 +95,41 @@ jooq {
 //    }
 //}
 
+// https://openapi-generator.tech/docs/plugins/#gradle
+openApiGenerate {
+	generatorName.set("kotlin")
+	inputSpec.set("$rootDir/docs/openapi/openapi.yaml")
+	outputDir.set("$buildDir/openapi-generated")
+	apiPackage.set("com.example.householdExpenses.openapi.api")
+	invokerPackage.set("com.example.householdExpenses.openapi.invoker")
+	modelPackage.set("com.example.householdExpenses.model")
+
+	// https://openapi-generator.tech/docs/generators/kotlin#config-options
+	configOptions.set(
+		mapOf(
+			"dateLibrary" to "java8",
+			"serializationLibrary" to "jackson"
+		),
+	)
+}
+
+kotlin.sourceSets.main {
+	// openapi-generator が build したコードを import できるようにする
+	kotlin.srcDir("$buildDir/openapi-generated/src/main/kotlin/com/example/householdExpenses/model")
+
+	// 以下のように指定すると、今回は使用しない api server のコードも含まれる
+	// ex.) src/main/kotlin/com/example/householdExpenses/openapi/api/CategoriesApi.kt
+	// kotlin.srcDir("$buildDir/openapi-generated/")
+	// その中で使用している okhttp3 の依存が必要になるため dependencies に依存関係の記載が必要となる
+	// compileOnly("com.squareup.okhttp3:okhttp:4.10.0")
+}
+
 tasks.withType<KotlinCompile> {
+
+	// コンパイル前に実施
+	// dependsOn("generateJooq")
+	dependsOn("openApiGenerate")
+
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
 		jvmTarget = "17"

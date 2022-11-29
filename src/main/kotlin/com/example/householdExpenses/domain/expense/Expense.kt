@@ -7,18 +7,18 @@ import java.time.LocalDate
  * @author kiyota
  */
 class Expense private constructor(
-    id: Int?, category: Category, member_id: Int, name: String, price: Int, memo: String?,
-    date: LocalDate, repeatable_month: Int, repeatable_count: Int
+    id: Int?, category: Category, memberId: Int, name: String, price: Int, memo: String?,
+    date: LocalDate, repeatableMonth: Int, repeatableCount: Int
 ) {
     var id: Int? = id
     val category: Category = category
-    val member_id = member_id
+    val memberId = memberId
     val name = name
     val price = price
     val memo = memo
     val date = date
-    val repeatable_month = repeatable_month
-    val repeatable_count = repeatable_count
+    val repeatableMonth = repeatableMonth
+    val repeatableCount = repeatableCount
 
     companion object {
 

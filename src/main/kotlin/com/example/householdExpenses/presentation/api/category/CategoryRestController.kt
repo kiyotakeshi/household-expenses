@@ -1,6 +1,7 @@
 package com.example.householdExpenses.presentation.api.category
 
 import com.example.householdExpenses.domain.category.Category
+import com.example.householdExpenses.model.CategoryResponseDto
 import com.example.householdExpenses.usecase.category.GetCategoriesUsecase
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -19,7 +20,7 @@ class CategoryRestController(private val getCategoriesUsecase: GetCategoriesUsec
         val categories: List<Category> = getCategoriesUsecase.getCategories()
 
         val response = categories.map {
-            CategoryResponseDto(id = it.id, name = it.name, rank = it.rank)
+            CategoryResponseDto(id = it.id!!, name = it.name, rank = it.rank)
         }.toList()
 
         return ResponseEntity.ok(response)
