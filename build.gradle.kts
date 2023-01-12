@@ -26,6 +26,8 @@ dependencies {
 	// https://github.com/etiennestuder/gradle-jooq-plugin#compatibility
 	implementation("org.jooq:jooq")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-security")
+
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -34,6 +36,8 @@ dependencies {
 	runtimeOnly("org.postgresql:postgresql")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.security:spring-security-test")
+
 	testImplementation("io.mockk:mockk:1.13.2")
 
 	jooqGenerator("org.postgresql:postgresql")
