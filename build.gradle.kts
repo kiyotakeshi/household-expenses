@@ -1,12 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.openapitools.codegen.languages.KotlinClientCodegen.DateLibrary
-import org.openapitools.codegen.languages.KotlinClientCodegen.MOSHI_CODE_GEN
 
+// https://docs.spring.io/spring-boot/docs/3.0.x/gradle-plugin/reference/htmlsingle/
 plugins {
-	id("org.springframework.boot") version "2.7.5"
+	id("org.springframework.boot") version "3.0.1"
 	id("io.spring.dependency-management") version "1.0.15.RELEASE"
 	// https://github.com/etiennestuder/gradle-jooq-plugin#compatibility
-	id("nu.studer.jooq") version "8.0"
+	id("nu.studer.jooq") version "8.1"
 	id("org.openapi.generator") version "6.2.1"
 	kotlin("jvm") version "1.6.21"
 	kotlin("plugin.spring") version "1.6.21"
@@ -20,10 +19,12 @@ repositories {
 	mavenCentral()
 }
 
+// https://docs.spring.io/spring-boot/docs/3.0.x/reference/html/dependency-versions.html#appendix.dependency-versions
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-jooq")
-	// for "gradle-jooq-plugin" https://github.com/etiennestuder/gradle-jooq-plugin#compatibility
-	implementation("org.jooq:jooq:3.17.5")
+	// for "gradle-jooq-plugin" Minimum jOOQ 3.16+
+	// https://github.com/etiennestuder/gradle-jooq-plugin#compatibility
+	implementation("org.jooq:jooq")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.flywaydb:flyway-core")
@@ -41,8 +42,7 @@ dependencies {
 }
 
 jooq {
-	// version.set(dependencyManagement.importedProperties["jooq.version"])
-	version.set("3.17.5")
+	version.set(dependencyManagement.importedProperties["jooq.version"])
 	edition.set(nu.studer.gradle.jooq.JooqEdition.OSS)
 
 	configurations {
