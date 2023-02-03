@@ -2,12 +2,12 @@ package com.example.householdExpenses.infrastructure.repository.jooq
 
 import com.example.householdExpenses.domain.user.User
 import com.example.householdExpenses.domain.user.UserRepository
-import com.example.householdExpenses.jooq.codegen.tables.records.RolesRecord
-import com.example.householdExpenses.jooq.codegen.tables.records.UsersRecord
 import com.example.householdExpenses.jooq.codegen.tables.references.ROLES
 import com.example.householdExpenses.jooq.codegen.tables.references.USERS
 import com.example.householdExpenses.jooq.codegen.tables.references.USERS_ROLES
-import org.jooq.*
+import org.jooq.DSLContext
+import org.jooq.Record
+import org.jooq.Result
 import org.springframework.stereotype.Repository
 
 @Repository
