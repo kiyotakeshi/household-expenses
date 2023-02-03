@@ -1,4 +1,4 @@
-package com.example.householdExpenses.presentation.api.expense
+package com.example.householdExpenses.presentation.api
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping

@@ -19,3 +19,4 @@ logging:
       jooq:
         tools:
           LoggerListener: DEBUG
+logging.level.org.springframework.security: TRACE

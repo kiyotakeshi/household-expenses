@@ -1,14 +1,19 @@
--- drop table bookmarks;
--- drop table expenses;
--- drop table categories;
--- drop table members;
--- drop table families;
+-- drop table if exists bookmarks;
+-- drop table if exists expenses;
+-- drop table if exists categories;
+-- drop table if exists members;
+-- drop table if exists families;
+-- drop table if exists users_roles;
+-- drop table if exists users;
+-- drop table if exists roles;
 
--- drop sequence expense_id_seq;
--- drop sequence category_id_seq;
--- drop sequence bookmark_id_seq;
--- drop sequence member_id_seq;
--- drop sequence family_id_seq;
+-- drop sequence if exists expense_id_seq;
+-- drop sequence if exists category_id_seq;
+-- drop sequence if exists bookmark_id_seq;
+-- drop sequence if exists member_id_seq;
+-- drop sequence if exists family_id_seq;
+-- drop sequence if exists users_id_seq;
+-- drop sequence if exists roles_id_seq;
 
 create sequence if not exists expense_id_seq start with 1;
 create sequence if not exists category_id_seq start with 1;
@@ -67,4 +72,35 @@ create table if not exists bookmarks
 
     constraint fk_bookmark_expense_98385b03
     foreign key (expense_id) references expenses (id)
+    );
+
+create sequence if not exists users_id_seq start with 1;
+
+create table if not exists users
+(
+    id       integer      not null default nextval('users_id_seq'),
+    email    varchar(255) not null,
+    password varchar(255) not null,
+    primary key (id)
+    );
+
+create sequence if not exists roles_id_seq start with 1;
+
+create table if not exists roles
+(
+    id   integer      not null default nextval('roles_id_seq'),
+    name varchar(255) not null,
+    primary key (id)
+    );
+
+create sequence if not exists users_roles_id_seq start with 1;
+
+create table if not exists users_roles
+(
+    id      integer not null default nextval('users_roles_id_seq'),
+    user_id integer references users (id),
+    role_id integer references roles (id),
+    foreign key (user_id) references users (id),
+    foreign key (role_id) references roles (id),
+    primary key (id)
     );

@@ -21,10 +21,9 @@ repositories {
 
 // https://docs.spring.io/spring-boot/docs/3.0.x/reference/html/dependency-versions.html#appendix.dependency-versions
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-jooq")
 	// for "gradle-jooq-plugin" Minimum jOOQ 3.16+
 	// https://github.com/etiennestuder/gradle-jooq-plugin#compatibility
-	implementation("org.jooq:jooq")
+	implementation("org.springframework.boot:spring-boot-starter-jooq")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 
