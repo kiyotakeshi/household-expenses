@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "f85ebe48-ca85-4fbc-afad-023bddd671ad",
+		"_postman_id": "2929a76c-b423-4e92-b289-a797b242bbd3",
 		"name": "household expenses",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15499051"
 	},
 	"item": [
 		{
@@ -27,6 +28,21 @@
 		{
 			"name": "get expenses",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1qazxsw2",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user1@example.com",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -38,25 +54,6 @@
 					"path": [
 						"api",
 						"expenses"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get categories",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:{{PORT}}/api/categories",
-					"host": [
-						"localhost"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"categories"
 					]
 				}
 			},

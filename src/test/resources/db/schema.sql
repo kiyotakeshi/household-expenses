@@ -15,6 +15,9 @@ create sequence if not exists category_id_seq start with 1;
 create sequence if not exists bookmark_id_seq start with 1;
 create sequence if not exists member_id_seq start with 1;
 create sequence if not exists family_id_seq start with 1;
+create sequence if not exists users_id_seq start with 1;
+create sequence if not exists roles_id_seq start with 1;
+create sequence if not exists users_roles_id_seq start with 1;
 
 create table if not exists categories
 (
@@ -67,4 +70,29 @@ create table if not exists bookmarks
 
     constraint fk_98385b03
     foreign key (expense_id) references expenses (id)
+    );
+
+create table if not exists users
+(
+    id       integer      not null default nextval('users_id_seq'),
+    email    varchar(255) not null,
+    password varchar(255) not null,
+    primary key (id)
+    );
+
+create table if not exists roles
+(
+    id   integer      not null default nextval('roles_id_seq'),
+    name varchar(255) not null,
+    primary key (id)
+    );
+
+create table if not exists users_roles
+(
+    id      integer not null default nextval('users_roles_id_seq'),
+    user_id integer references users (id),
+    role_id integer references roles (id),
+    foreign key (user_id) references users (id),
+    foreign key (role_id) references roles (id),
+    primary key (id)
     );

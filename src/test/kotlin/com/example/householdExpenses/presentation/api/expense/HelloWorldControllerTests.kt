@@ -1,12 +1,13 @@
 package com.example.householdExpenses.presentation.api.expense
 
-import org.apache.tomcat.util.buf.Utf8Encoder
+import com.example.householdExpenses.core.security.SecurityConfig
+import com.example.householdExpenses.presentation.api.HelloWorldController
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.http.MediaType
+import org.springframework.context.annotation.Import
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 
@@ -19,14 +20,16 @@ import org.springframework.test.web.servlet.get
  * https://spring.pleiades.io/spring-boot/docs/current/reference/html/test-auto-configuration.html#appendix.test-auto-configuration
  * @author kiyota
  */
-//@SpringBootTest
 @WebMvcTest(HelloWorldController::class)
 @AutoConfigureMockMvc
-internal class HelloWorldControllerTests(
+@Import(SecurityConfig::class)
+internal class
+HelloWorldControllerTests(
     @Autowired
     val mockMvc: MockMvc
 ) {
     @Test
+    @DisplayName("/api/hello は public access ができる")
     internal fun helloWorld() {
         mockMvc.get("/api/hello")
             .andDo { print() }

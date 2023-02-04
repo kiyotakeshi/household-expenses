@@ -3,10 +3,7 @@ package com.example.householdExpenses.infrastructure.repository.jooq
 import com.example.householdExpenses.domain.category.Category
 import com.example.householdExpenses.domain.expense.Expense
 import com.example.householdExpenses.domain.expense.ExpenseRepository
-import com.example.householdExpenses.jooq.codegen.keys.EXPENSES__FK_EXPENSE_CATEGORY_CD0468A2
 import com.example.householdExpenses.jooq.codegen.tables.Expenses
-import com.example.householdExpenses.jooq.codegen.tables.records.CategoriesRecord
-import com.example.householdExpenses.jooq.codegen.tables.records.ExpensesRecord
 import com.example.householdExpenses.jooq.codegen.tables.references.CATEGORIES
 import com.example.householdExpenses.jooq.codegen.tables.references.EXPENSES
 import org.jooq.DSLContext
