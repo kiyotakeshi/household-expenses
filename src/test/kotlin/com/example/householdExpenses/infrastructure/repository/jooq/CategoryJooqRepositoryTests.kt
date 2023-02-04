@@ -14,20 +14,12 @@ import org.springframework.context.annotation.Import
  * @author kiyota
  */
 @JooqTest
-internal class CategoryJooqRepositoryTests(@Autowired sut: CategoryJooqRepository) {
-    private val sut: CategoryJooqRepository
-
-    init {
-        this.sut = sut
-    }
+@Import(CategoryJooqRepository::class)
+internal class CategoryJooqRepositoryTests(@Autowired private val sut: CategoryJooqRepository) {
 
     @Test
     internal fun selectAll() {
         val categories: List<Category> = sut.getCategories()
         assertThat(categories).hasSize(2)
     }
-
-    @Configuration
-    @Import(CategoryJooqRepository::class)
-    internal class LocalTestContext
 }

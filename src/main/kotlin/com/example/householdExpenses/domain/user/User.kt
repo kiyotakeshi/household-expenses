@@ -9,6 +9,9 @@ class User private constructor(
     val roles = roles
 
     companion object {
+        fun create(email: String, password: String, roles: Set<String>?): User {
+            return User(null, email, password, roles)
+        }
         fun reconstruct(id: Int, email: String, password: String, roles: Set<String>?): User {
             return User(id, email, password, roles)
         }

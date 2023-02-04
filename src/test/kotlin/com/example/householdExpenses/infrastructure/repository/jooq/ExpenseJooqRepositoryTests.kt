@@ -11,16 +11,12 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
 
 /**
- * [com.example.householdExpenses.infrastructure.repository.jooq]
+ * [com.example.householdExpenses.infrastructure.repository.jooq.ExpenseJooqRepository]
  * @author kiyota
  */
 @JooqTest
-internal class ExpenseJooqRepositoryTests(@Autowired sut: ExpenseJooqRepository) {
-    private val sut: ExpenseJooqRepository
-
-    init {
-        this.sut = sut
-    }
+@Import(ExpenseJooqRepository::class)
+internal class ExpenseJooqRepositoryTests(@Autowired private val sut: ExpenseJooqRepository) {
 
     @Test
     fun selectAll() {
@@ -29,8 +25,4 @@ internal class ExpenseJooqRepositoryTests(@Autowired sut: ExpenseJooqRepository)
         assertThat(expenses[0].name).isEqualTo(Fixtures.ExpenseA().name)
         assertThat(expenses[0].category.name).isEqualTo(Fixtures.ExpenseA().category.name)
     }
-
-    @Configuration
-    @Import(ExpenseJooqRepository::class)
-    internal class LocalTestContext
 }

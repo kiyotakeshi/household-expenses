@@ -2,6 +2,7 @@ package com.example.householdExpenses.domain
 
 import com.example.householdExpenses.domain.category.Category
 import com.example.householdExpenses.domain.expense.Expense
+import com.example.householdExpenses.domain.user.User
 import java.time.LocalDate
 
 /**
@@ -34,6 +35,13 @@ class Fixtures {
 
         fun ExpenseC(): Expense {
             return Expense.create(CategoryA(), 2, "おやつ", 150, null, LocalDate.of(2022, 11, 23), 0, 0)
+        }
+
+        fun NormalUser(): User {
+            return User.create("user1@example.com", "password1", setOf("USER"))
+        }
+        fun AdminUser(): User {
+            return User.create("user1@example.com", "password1", setOf("ADMIN","USER"))
         }
     }
 }
