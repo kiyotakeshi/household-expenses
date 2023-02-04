@@ -1,5 +1,6 @@
 package com.example.householdExpenses.integration
 
+import com.example.householdExpenses.IntegrationTestUtils
 import com.example.householdExpenses.core.security.SecurityConfig
 import com.example.householdExpenses.domain.Fixtures
 import org.junit.jupiter.api.Assertions.*
@@ -28,18 +29,8 @@ internal class CategoryIntegrationTests @Autowired constructor(
 ) {
     private val requestPath = "/api/categories";
 
-    private fun fetchJwt(): String {
-        val tokenRequest = mockMvc.post("/api/token") {
-            with(httpBasic("user1@example.com", "1qazxsw2"))
-        }
-            .andExpect { status { isOk() } }
-            .andReturn()
-
-        return tokenRequest.response.contentAsString
-    }
-
     @Test
-    internal fun `get categories with HttpBasicAuth`() {
+    internal fun `get categories with Basic Authentication`() {
         mockMvc.get(requestPath) {
             with(httpBasic("user1@example.com", "1qazxsw2"))
         }
@@ -59,8 +50,8 @@ internal class CategoryIntegrationTests @Autowired constructor(
 
     // @ref https://github.com/spring-projects/spring-security-samples/blob/main/servlet/spring-boot/java/jwt/login/src/test/java/example/web/HelloControllerTests.java#L47
     @Test
-    internal fun `get categories with HttpBearAuth`() {
-        val token = fetchJwt()
+    internal fun `get categories with JWT`() {
+        val token = IntegrationTestUtils.fetchJwt(mockMvc)
 
         mockMvc.get(requestPath) {
             header("Authorization", "Bearer $token")
