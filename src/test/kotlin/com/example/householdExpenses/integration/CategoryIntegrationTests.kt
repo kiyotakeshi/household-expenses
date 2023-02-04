@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.get
 
 /**
  * @ref https://github.com/spring-projects/spring-security-samples/blob/main/servlet/spring-boot/java/jwt/login/src/test/java/example/web/HelloControllerTests.java
- * [com.example.householdExpenses.presentation.api.expense.ExpenseRestController]
+ * [com.example.householdExpenses.presentation.api.expense.ExpenseController]
  * @author kiyota
  */
 @SpringBootTest

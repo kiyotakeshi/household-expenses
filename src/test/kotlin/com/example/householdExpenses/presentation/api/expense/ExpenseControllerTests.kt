@@ -19,16 +19,16 @@ import org.springframework.test.web.servlet.get
 import java.time.LocalDate
 
 /**
- * [com.example.householdExpenses.presentation.api.expense.ExpenseRestController]
+ * [com.example.householdExpenses.presentation.api.expense.ExpenseController]
  * expense の id は DB にて採番するため、インスタンスの生成時には id を指定しない
  * Fixture の生成時にも id を指定できないようにしているのでこのテストは Disabled にする
  * この layer のテストは積極的には書かないでおく、 Integration test でカバーする
  * @author kiyota
  */
-@WebMvcTest(ExpenseRestController::class)
+@WebMvcTest(ExpenseController::class)
 @AutoConfigureMockMvc
 @Disabled
-internal class ExpenseRestControllerTests(
+internal class ExpenseControllerTests(
     @Autowired
     val mockMvc: MockMvc,
 ) {

@@ -1,14 +1,11 @@
 package com.example.householdExpenses.core.security
 
-import com.example.householdExpenses.domain.Fixtures
 import com.example.householdExpenses.domain.Fixtures.Companion.AdminUser
 import com.example.householdExpenses.domain.Fixtures.Companion.NormalUser
 import com.example.householdExpenses.domain.user.UserRepository
 import io.mockk.every
 import io.mockk.mockk
-import org.assertj.core.api.Assertions
-import org.assertj.core.api.Assertions.*
-import org.junit.jupiter.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 

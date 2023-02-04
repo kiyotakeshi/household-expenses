@@ -14,7 +14,7 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 
 /**
- * [com.example.householdExpenses.presentation.api.expense.ExpenseRestController]
+ * [com.example.householdExpenses.presentation.api.expense.ExpenseController]
  * @author kiyota
  */
 @SpringBootTest

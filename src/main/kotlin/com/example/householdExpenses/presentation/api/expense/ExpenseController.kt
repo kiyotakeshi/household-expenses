@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RestController
 @RequestMapping("/api/expenses")
-class ExpenseRestController(private val getExpensesUsecase: GetExpensesUsecase) {
+class ExpenseController(private val getExpensesUsecase: GetExpensesUsecase) {
 
     @GetMapping
     fun getExpenses(): ResponseEntity<List<ExpenseResponseDto>> {
