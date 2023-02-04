@@ -12,6 +12,7 @@ import org.springframework.http.MediaType
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
+import org.springframework.test.web.servlet.post
 
 /**
  * @ref https://github.com/spring-projects/spring-security-samples/blob/main/servlet/spring-boot/java/jwt/login/src/test/java/example/web/HelloControllerTests.java
@@ -26,6 +27,16 @@ internal class CategoryIntegrationTests @Autowired constructor(
     val mockMvc: MockMvc,
 ) {
     private val requestPath = "/api/categories";
+
+    private fun fetchJwt(): String {
+        val tokenRequest = mockMvc.post("/api/token") {
+            with(httpBasic("user1@example.com", "1qazxsw2"))
+        }
+            .andExpect { status { isOk() } }
+            .andReturn()
+
+        return tokenRequest.response.contentAsString
+    }
 
     @Test
     internal fun `get categories with HttpBasicAuth`() {
@@ -43,6 +54,20 @@ internal class CategoryIntegrationTests @Autowired constructor(
                 jsonPath("$[0].name") { value(Fixtures.CategoryA().name) }
                 jsonPath("$[0].rank") { value(Fixtures.CategoryA().rank) }
                 jsonPath("$[1].name") { value(Fixtures.CategoryB().name) }
+            }
+    }
+
+    // @ref https://github.com/spring-projects/spring-security-samples/blob/main/servlet/spring-boot/java/jwt/login/src/test/java/example/web/HelloControllerTests.java#L47
+    @Test
+    internal fun `get categories with HttpBearAuth`() {
+        val token = fetchJwt()
+
+        mockMvc.get(requestPath) {
+            header("Authorization", "Bearer $token")
+        }
+            .andDo { print() }
+            .andExpect {
+                status { isOk() }
             }
     }
 

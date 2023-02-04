@@ -12,6 +12,7 @@ import org.springframework.http.MediaType
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
+import org.springframework.test.web.servlet.post
 
 /**
  * [com.example.householdExpenses.presentation.api.expense.ExpenseController]
@@ -24,6 +25,16 @@ internal class ExpenseIntegrationTests @Autowired constructor(
     val mockMvc: MockMvc,
 ) {
     val requestPath = "/api/expenses";
+
+    private fun fetchJwt(): String {
+        val tokenRequest = mockMvc.post("/api/token") {
+            with(SecurityMockMvcRequestPostProcessors.httpBasic("user1@example.com", "1qazxsw2"))
+        }
+            .andExpect { status { isOk() } }
+            .andReturn()
+
+        return tokenRequest.response.contentAsString
+    }
 
     @Test
     internal fun `get expenses with HttpBasicAuth`() {
@@ -46,6 +57,19 @@ internal class ExpenseIntegrationTests @Autowired constructor(
                 jsonPath("$[1].name") { value(Fixtures.ExpenseB().name) }
                 jsonPath("$[1].category_name") { value(Fixtures.ExpenseB().category.name) }
                 jsonPath("$[2].name") { value(Fixtures.ExpenseC().name) }
+            }
+    }
+
+    @Test
+    internal fun `get categories with HttpBearAuth`() {
+        val token = fetchJwt()
+
+        mockMvc.get(requestPath) {
+            header("Authorization", "Bearer $token")
+        }
+            .andDo { print() }
+            .andExpect {
+                status { isOk() }
             }
     }
 
