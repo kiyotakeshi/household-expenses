@@ -7,6 +7,142 @@
 	},
 	"item": [
 		{
+			"name": "expense",
+			"item": [
+				{
+					"name": "get expenses",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "1qazxsw2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user1@example.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:{{PORT}}/api/expenses",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"expenses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get expenses with JWT",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlcjFAZXhhbXBsZS5jb20iLCJleHAiOjE2NzU1MTYxMTMsImlhdCI6MTY3NTQ4NzMxMywic2NvcGUiOiJST0xFX1VTRVIifQ.UDjoP7eh9uGlqGvyi86xLsd1wIWI7aJJb4Qmv7ri6dX8xp0rJ-WJ3MO8uWMI4SBqjiI7PZwn2kVChD1cMqW0ambc9sseB0AVCZ6yPOJRLypHK0b4DaDXerGUhf38LJcYxSPUb6W6Bs0fsAFeFr5sz8RTX-DiPDh7TGuU1LXnyi7HLbCMwzo5u4Qd5QcFqCsX0V_A0xJGtmwTPXxQYRKZ0LZ0svIFoc_3uveoX2ltfBDqhHYOPDbnUPjewNTTkzQrdkWfTzCtCsXJeqRBhr3y5PPamnEWQerr3EzVZpp-6JmWkwbgsa3zImPmRfjhICq36QGMF3C6oSuHK_i6xQdRig",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:{{PORT}}/api/expenses",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"expenses"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "get categories",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "1qazxsw2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user1@example.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:{{PORT}}/api/categories",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get categories with JWT Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlcjFAZXhhbXBsZS5jb20iLCJleHAiOjE2NzU1OTgwOTMsImlhdCI6MTY3NTU2OTI5Mywic2NvcGUiOiJST0xFX1VTRVIifQ.mHd9rYja-4VXXU7J4hyc4JxAQRFRmywXzBt2ngl2C-Je51HoqV9NEzXTA6YuBLpPnz0yDIj2w1KrFGjjkICXmHTSzHRAM2a46dw9hLKDTy0gX5v1yGfobmmulbYm7cN4OH4CgZfAsZsidF_J962YY2T4-giutiBfWLuyitUDrSwLACSrRG0vmYyOhWdJ41Wzh8qvM3wnsf9-Wqe5gbx_iUjwV6arSEnj4YkWjXXmMksE5NaKza8uaxWN0pZiIRFTYMIeQgnwXnztTqfLeekcQ64BcrCtnipRyDM-nRaYqzvey4GQcC6xHE0G8TF9xDmtSIkEkMhIAT81YWPKGvODQQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:{{PORT}}/api/categories",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "hello world",
 			"request": {
 				"method": "GET",
@@ -20,69 +156,6 @@
 					"path": [
 						"api",
 						"hello"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get expenses",
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "1qazxsw2",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "user1@example.com",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:{{PORT}}/api/expenses",
-					"host": [
-						"localhost"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"expenses"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get expenses with JWT",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlcjFAZXhhbXBsZS5jb20iLCJleHAiOjE2NzU1MTYxMTMsImlhdCI6MTY3NTQ4NzMxMywic2NvcGUiOiJST0xFX1VTRVIifQ.UDjoP7eh9uGlqGvyi86xLsd1wIWI7aJJb4Qmv7ri6dX8xp0rJ-WJ3MO8uWMI4SBqjiI7PZwn2kVChD1cMqW0ambc9sseB0AVCZ6yPOJRLypHK0b4DaDXerGUhf38LJcYxSPUb6W6Bs0fsAFeFr5sz8RTX-DiPDh7TGuU1LXnyi7HLbCMwzo5u4Qd5QcFqCsX0V_A0xJGtmwTPXxQYRKZ0LZ0svIFoc_3uveoX2ltfBDqhHYOPDbnUPjewNTTkzQrdkWfTzCtCsXJeqRBhr3y5PPamnEWQerr3EzVZpp-6JmWkwbgsa3zImPmRfjhICq36QGMF3C6oSuHK_i6xQdRig",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:{{PORT}}/api/expenses",
-					"host": [
-						"localhost"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"expenses"
 					]
 				}
 			},
