@@ -32,3 +32,16 @@ OpenJDK 64-Bit Server VM (build 17.0.3.1+2-LTS, mixed mode, sharing)
 ## architecture
 
 @see [architecture.md](./docs/architecture.md)
+
+---
+## run
+
+```shell
+$ docker compose up -d
+
+# exec flyway migration
+# generate OpenAPI, jOOQ code
+$ ./gradlew clean build
+
+$ java -jar build/libs/household-expenses-0.0.1-SNAPSHOT.jar
+```
