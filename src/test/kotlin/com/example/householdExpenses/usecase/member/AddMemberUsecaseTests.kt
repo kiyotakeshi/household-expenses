@@ -1,5 +1,6 @@
 package com.example.householdExpenses.usecase.member
 
+import com.example.householdExpenses.domain.Fixtures
 import com.example.householdExpenses.domain.member.MemberRepository
 import com.example.householdExpenses.domain.user.UserRepository
 import com.example.householdExpenses.model.MemberRequestDto
@@ -28,7 +29,7 @@ internal class AddMemberUsecaseTests {
         mockkStatic(SecurityContextHolder::class)
         every { SecurityContextHolder.getContext().authentication } returns authentication
 
-        val member = MemberRequestDto("baby1", LocalDate.of(2023, 2, 5))
+        val member = Fixtures.memberRequestDtoA()
         sut.addMember(member)
         verify(exactly = 1) { userRepository.getUser(eq(userName)) }
         verify(exactly = 1) { memberRepository.addMember(any(), any()) }

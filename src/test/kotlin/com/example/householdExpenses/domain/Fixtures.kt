@@ -3,6 +3,7 @@ package com.example.householdExpenses.domain
 import com.example.householdExpenses.domain.category.Category
 import com.example.householdExpenses.domain.expense.Expense
 import com.example.householdExpenses.domain.user.User
+import com.example.householdExpenses.model.MemberRequestDto
 import java.time.LocalDate
 
 /**
@@ -42,6 +43,10 @@ class Fixtures {
         }
         fun AdminUser(): User {
             return User.create("user1@example.com", "password1", setOf("ADMIN","USER"))
+        }
+
+        fun memberRequestDtoA(): MemberRequestDto {
+            return MemberRequestDto("baby1", LocalDate.of(2023, 2, 5))
         }
     }
 }

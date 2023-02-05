@@ -13,7 +13,7 @@ values (1, '食費', 1),
 insert into users (id, email, password)
 values
     -- $ ./bin/spring encodepassword 1qazxsw2
-    (1, 'user1@example.com', '$2a$10$OnVJL2f7jVyirYRYs/sIUe0T5yyzpRz5jqNBtF77rP2njA0tGzHOi'),
+    (1, 'user1@example.com', '$2a$10$dvgQJieIslNPqBAkaZdtmurS3GamCpj0y6C58y2qbCq6gWEulxpOS'),
     -- $ ./bin/spring encodepassword 2wsxzaq1
     (2, 'admin@example.com', '$2a$10$KQmRCEZWRXSZpY3PqJT6GuuZYOi/TFUFxItmby8I8TZPCgTio4eh');
 
