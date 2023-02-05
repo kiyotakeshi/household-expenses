@@ -42,8 +42,49 @@ paths:
                 items:
                   $ref: '#/components/schemas/categoryResponseDto'
 
+  # member
+  /members:
+    post:
+      tags:
+        - 'members'
+      summary: 'メンバーの登録'
+      description: '登録したメンバーを返す'
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/memberRequestDto'
+      responses:
+        '201':
+          description: '正常'
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/memberResponseDto'
+        '422':
+          description: 'validation error'
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/validation_error'
 components:
   schemas:
+    # request
+    memberRequestDto:
+      type: object
+      required:
+        - name
+        - birthday
+      properties:
+        name:
+          type: string
+          example: 'mybaby'
+        birthday:
+          type: string
+          format: date
+          example: '2023-02-05'
+
+    # response
     expenseResponseDto:
       type: object
       required:
@@ -91,7 +132,6 @@ components:
             1ヶ月に1回だと **1** となる
           example: 1
           nullable: true
-
     categoryResponseDto:
       type: object
       required:
@@ -108,3 +148,28 @@ components:
         rank:
           type: integer
           example: 1
+    memberResponseDto:
+      type: object
+      required:
+        - id
+        - name
+        - birthday
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: 'mybaby'
+        birthday:
+          type: string
+          format: date
+          example: '2022-05-15'
+
+
+    validation_error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: 'validation error'

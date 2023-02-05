@@ -37,46 +37,6 @@ create table if not exists families
     name varchar(255)
     );
 
-create table if not exists members
-(
-    id        integer      not null default nextval('member_id_seq') primary key,
-    family_id integer,
-    name      varchar(255) not null,
-    birthday  date         not null,
-
-    constraint fk_member_family_6a592267
-    foreign key (family_id) references families (id)
-    );
-
-create table if not exists expenses
-(
-    id               integer not null default nextval('expense_id_seq') primary key,
-    category_id      integer not null,
-    member_id        integer not null,
-    name             varchar(510),
-    price            integer not null,
-    memo             varchar(510),
-    -- not keyword
-    -- select count(*) from pg_get_keywords() where word = 'date';
-    date             date    not null,
-    repeatable_month integer,
-    repeatable_count integer,
-
-    constraint fk_expense_category_cd0468a2
-    foreign key (category_id) references categories (id),
-    constraint fk_expense_member_c2e35b3e
-    foreign key (member_id) references members (id)
-    );
-
-create table if not exists bookmarks
-(
-    id         integer not null default nextval('bookmark_id_seq') primary key,
-    expense_id integer not null,
-
-    constraint fk_bookmark_expense_98385b03
-    foreign key (expense_id) references expenses (id)
-    );
-
 create sequence if not exists users_id_seq start with 1;
 
 create table if not exists users
@@ -107,3 +67,53 @@ create table if not exists users_roles
     foreign key (role_id) references roles (id),
     primary key (id)
     );
+
+create table if not exists roles
+(
+    id   integer      not null default nextval('roles_id_seq'),
+    name varchar(255) not null,
+    primary key (id)
+    );
+
+create table if not exists members
+(
+    id        integer      not null default nextval('member_id_seq') primary key,
+    family_id integer references families (id),
+    user_id  integer not null references users (id),
+    name      varchar(255) not null,
+    birthday  date         not null,
+
+    foreign key (family_id) references families (id),
+    foreign key (user_id) references users (id)
+    );
+
+create table if not exists expenses
+(
+    id               integer not null default nextval('expense_id_seq') primary key,
+    category_id      integer not null,
+    member_id        integer not null,
+    name             varchar(510),
+    price            integer not null,
+    memo             varchar(510),
+    -- not keyword
+    -- select count(*) from pg_get_keywords() where word = 'date';
+    date             date    not null,
+    repeatable_month integer,
+    repeatable_count integer,
+
+    constraint fk_expense_category_cd0468a2
+    foreign key (category_id) references categories (id),
+    constraint fk_expense_member_c2e35b3e
+    foreign key (member_id) references members (id)
+    );
+
+create table if not exists bookmarks
+(
+    id         integer not null default nextval('bookmark_id_seq') primary key,
+    user_id  integer references users (id),
+    expense_id integer not null references expenses (id),
+
+    constraint fk_bookmark_expense_98385b03
+    foreign key (expense_id) references expenses (id),
+    foreign key (user_id) references users (id)
+);
