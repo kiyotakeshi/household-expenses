@@ -1,5 +1,6 @@
 package com.example.householdExpenses.integration
 
+import com.example.householdExpenses.IntegrationTestUtils
 import com.example.householdExpenses.core.security.SecurityConfig
 import com.example.householdExpenses.domain.Fixtures
 import org.junit.jupiter.api.Assertions.*
@@ -12,10 +13,11 @@ import org.springframework.http.MediaType
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
+import org.springframework.test.web.servlet.post
 
 /**
  * @ref https://github.com/spring-projects/spring-security-samples/blob/main/servlet/spring-boot/java/jwt/login/src/test/java/example/web/HelloControllerTests.java
- * [com.example.householdExpenses.presentation.api.expense.ExpenseRestController]
+ * [com.example.householdExpenses.presentation.api.expense.ExpenseController]
  * @author kiyota
  */
 @SpringBootTest
@@ -28,7 +30,7 @@ internal class CategoryIntegrationTests @Autowired constructor(
     private val requestPath = "/api/categories";
 
     @Test
-    internal fun `get categories with HttpBasicAuth`() {
+    internal fun `get categories with Basic Authentication`() {
         mockMvc.get(requestPath) {
             with(httpBasic("user1@example.com", "1qazxsw2"))
         }
@@ -43,6 +45,20 @@ internal class CategoryIntegrationTests @Autowired constructor(
                 jsonPath("$[0].name") { value(Fixtures.CategoryA().name) }
                 jsonPath("$[0].rank") { value(Fixtures.CategoryA().rank) }
                 jsonPath("$[1].name") { value(Fixtures.CategoryB().name) }
+            }
+    }
+
+    // @ref https://github.com/spring-projects/spring-security-samples/blob/main/servlet/spring-boot/java/jwt/login/src/test/java/example/web/HelloControllerTests.java#L47
+    @Test
+    internal fun `get categories with JWT`() {
+        val token = IntegrationTestUtils.fetchJwt(mockMvc)
+
+        mockMvc.get(requestPath) {
+            header("Authorization", "Bearer $token")
+        }
+            .andDo { print() }
+            .andExpect {
+                status { isOk() }
             }
     }
 

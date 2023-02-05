@@ -13,6 +13,10 @@ spring:
     # @see org/springframework/boot/autoconfigure/flyway/FlywayProperties.java
     locations: "classpath:db/migration"
 
+rsa:
+  public-key: classpath:certs/public.pem
+  private-key: classpath:certs/private.pem
+
 logging:
   level:
     org:

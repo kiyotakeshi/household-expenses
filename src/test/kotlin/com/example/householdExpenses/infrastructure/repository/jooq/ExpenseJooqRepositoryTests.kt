@@ -2,20 +2,19 @@ package com.example.householdExpenses.infrastructure.repository.jooq
 
 import com.example.householdExpenses.domain.Fixtures
 import com.example.householdExpenses.domain.expense.Expense
-import org.assertj.core.api.Assertions.*
-import org.junit.jupiter.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jooq.JooqTest
-import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
+import org.springframework.security.config.crypto.RsaKeyConversionServicePostProcessor
 
 /**
  * [com.example.householdExpenses.infrastructure.repository.jooq.ExpenseJooqRepository]
  * @author kiyota
  */
 @JooqTest
-@Import(ExpenseJooqRepository::class)
+@Import(ExpenseJooqRepository::class, RsaKeyConversionServicePostProcessor::class)
 internal class ExpenseJooqRepositoryTests(@Autowired private val sut: ExpenseJooqRepository) {
 
     @Test

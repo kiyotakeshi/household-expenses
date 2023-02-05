@@ -1,5 +1,6 @@
 package com.example.householdExpenses.integration
 
+import com.example.householdExpenses.IntegrationTestUtils
 import com.example.householdExpenses.core.security.SecurityConfig
 import com.example.householdExpenses.domain.Fixtures
 import org.junit.jupiter.api.Assertions.*
@@ -14,19 +15,19 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 
 /**
- * [com.example.householdExpenses.presentation.api.expense.ExpenseRestController]
+ * [com.example.householdExpenses.presentation.api.expense.ExpenseController]
  * @author kiyota
  */
 @SpringBootTest
 @AutoConfigureMockMvc
 @Import(SecurityConfig::class)
 internal class ExpenseIntegrationTests @Autowired constructor(
-    val mockMvc: MockMvc,
-) {
+    val mockMvc: MockMvc
+){
     val requestPath = "/api/expenses";
 
     @Test
-    internal fun `get expenses with HttpBasicAuth`() {
+    internal fun `get expenses with Basic Authentication`() {
         mockMvc.get(requestPath) {
             with(SecurityMockMvcRequestPostProcessors.httpBasic("user1@example.com", "1qazxsw2"))
         }
@@ -46,6 +47,19 @@ internal class ExpenseIntegrationTests @Autowired constructor(
                 jsonPath("$[1].name") { value(Fixtures.ExpenseB().name) }
                 jsonPath("$[1].category_name") { value(Fixtures.ExpenseB().category.name) }
                 jsonPath("$[2].name") { value(Fixtures.ExpenseC().name) }
+            }
+    }
+
+    @Test
+    internal fun `get categories with JWT`() {
+         val token = IntegrationTestUtils.fetchJwt(mockMvc)
+
+        mockMvc.get(requestPath) {
+            header("Authorization", "Bearer $token")
+        }
+            .andDo { print() }
+            .andExpect {
+                status { isOk() }
             }
     }
 

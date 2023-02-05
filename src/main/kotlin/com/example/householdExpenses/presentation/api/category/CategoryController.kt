@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RestController
 @RequestMapping("/api/categories")
-class CategoryRestController(private val getCategoriesUsecase: GetCategoriesUsecase) {
+class CategoryController(private val getCategoriesUsecase: GetCategoriesUsecase) {
 
     @GetMapping
     fun getCategories(): ResponseEntity<List<CategoryResponseDto>> {
