@@ -6,8 +6,10 @@ import com.example.householdExpenses.domain.user.UserRepository
 import io.mockk.every
 import io.mockk.mockk
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import org.springframework.security.core.authority.SimpleGrantedAuthority
+import org.springframework.security.core.userdetails.UsernameNotFoundException
 
 /**
  * [com.example.householdExpenses.core.security.CustomUserDetails]
@@ -28,8 +30,18 @@ internal class CustomUserDetailsTests {
     @Test
     internal fun `admin user has ADMIN,USER roles`() {
         every { userRepository.getUser(any()) } returns AdminUser()
-        val actual = sut.loadUserByUsername("user1@example.com")
+        val actual = sut.loadUserByUsername("admin@example.com")
         val authorities = listOf(SimpleGrantedAuthority("ROLE_ADMIN"), SimpleGrantedAuthority("ROLE_USER"))
         assertThat(actual.authorities).containsAll(authorities)
+    }
+
+    @Test
+    internal fun `user not found`() {
+        val email = "admin@example.com"
+        every { userRepository.getUser(any()) } returns null
+        assertThatThrownBy {
+            sut.loadUserByUsername(email)
+        }.isInstanceOf(UsernameNotFoundException::class.java)
+            .hasMessageContaining("user details not found for the user: $email")
     }
 }

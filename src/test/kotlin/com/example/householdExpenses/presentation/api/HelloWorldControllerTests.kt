@@ -1,4 +1,4 @@
-package com.example.householdExpenses.presentation.api.expense
+package com.example.householdExpenses.presentation.api
 
 import com.example.householdExpenses.core.security.SecurityConfig
 import com.example.householdExpenses.presentation.api.HelloWorldController
@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.get
 
 /**
  * https://kotlinlang.org/docs/kotlin-doc.html#links-to-elements
- * [com.example.householdExpenses.presentation.api.expense.HelloWorldController]
+ * [com.example.householdExpenses.presentation.api.HelloWorldController]
  *
  * MVC slice test
  * https://spring.pleiades.io/spring-boot/docs/current/reference/html/features.html#features.testing.spring-boot-applications.spring-mvc-tests
