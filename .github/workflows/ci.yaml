@@ -1,0 +1,55 @@
+name: java
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    # @see https://docs.github.com/ja/actions/using-containerized-services/creating-postgresql-service-containers
+    # Service containers to run with `container-job`
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres:12.12
+        # Provide the password for postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: household-expenses
+          POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      # https://github.com/actions/cache/blob/main/examples.md#java---gradle
+      - name: cache gradle
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: setup Java
+        uses: actions/setup-java@v3
+        with:
+          # https://github.com/actions/setup-java#supported-distributions
+          distribution: 'liberica'
+          java-version: '17'
+          cache: 'gradle'
+      - name: test
+        run: ./gradlew build
