@@ -6,6 +6,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.0.15.RELEASE"
 	// https://github.com/etiennestuder/gradle-jooq-plugin#compatibility
 	id("nu.studer.jooq") version "8.1"
+	id("org.flywaydb.flyway") version "9.8.1"
 	id("org.openapi.generator") version "6.2.1"
 	kotlin("jvm") version "1.6.21"
 	kotlin("plugin.spring") version "1.6.21"
@@ -43,6 +44,16 @@ dependencies {
 	jooqGenerator("org.postgresql:postgresql")
 	// https://github.com/etiennestuder/gradle-jooq-plugin/issues/207
 	jooqGenerator("jakarta.xml.bind:jakarta.xml.bind-api:3.0.1")
+}
+
+flyway {
+	// TODO: 環境変数から読み取るようにし、direnv 等で設定する
+	// url = System.getenv("POSTGRES_URL")
+	// user = System.getenv("POSTGRES_USER")
+	// password = System.getenv("POSTGRES_PASSWORD")
+	url = "jdbc:postgresql://localhost:5432/household-expenses"
+	user = "postgres"
+	password = "password"
 }
 
 jooq {
@@ -91,6 +102,12 @@ jooq {
 	}
 }
 
+// generateJooq の前に flywayMigrate を実行させる
+// @ref https://zenn.dev/yamachoo/articles/spring-jooq-flyway-mysql#tips
+tasks.named("generateJooq") {
+	dependsOn(tasks.flywayMigrate)
+}
+
 // test の task 実行時に generateJooq を実行しないための設定
 // 実際は、 `generateSchemaSourceOnCompilation.set(false)` で無効にできたため不要
 //tasks {
@@ -131,7 +148,7 @@ kotlin.sourceSets.main {
 tasks.withType<KotlinCompile> {
 
 	// コンパイル前に実施
-	// dependsOn("generateJooq")
+	dependsOn("generateJooq")
 	dependsOn("openApiGenerate")
 
 	kotlinOptions {

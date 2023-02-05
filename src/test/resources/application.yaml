@@ -15,8 +15,8 @@ spring:
     enabled: false
 
 rsa:
-  public-key: classpath:certs/public.pem
-  private-key: classpath:certs/private.pem
+  public-key: classpath:certs/dummy-public.pem
+  private-key: classpath:certs/dummy-private.pem
 
 logging:
   level:

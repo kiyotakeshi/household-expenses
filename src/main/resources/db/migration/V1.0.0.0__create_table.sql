@@ -1,3 +1,6 @@
+-- create database if not exists `household-expenses`;
+-- use `household-expenses`;
+
 -- drop table if exists bookmarks;
 -- drop table if exists expenses;
 -- drop table if exists categories;
