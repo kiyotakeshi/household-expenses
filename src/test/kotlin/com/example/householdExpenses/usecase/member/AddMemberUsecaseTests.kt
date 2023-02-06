@@ -23,7 +23,7 @@ internal class AddMemberUsecaseTests {
     private val sut = AddMemberUsecase(memberRepository, userRepository)
 
     @Test
-    fun `should call its repository to retrieve expenses`() {
+    fun `should call its repository to add member`() {
         val userName = "user1@example.com"
         every { authentication.name } returns userName
         mockkStatic(SecurityContextHolder::class)

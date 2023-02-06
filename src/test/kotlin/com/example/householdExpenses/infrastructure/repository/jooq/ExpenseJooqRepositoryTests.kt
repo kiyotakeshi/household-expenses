@@ -19,9 +19,31 @@ internal class ExpenseJooqRepositoryTests(@Autowired private val sut: ExpenseJoo
 
     @Test
     fun selectAll() {
-        val expenses: List<Expense> = sut.getExpenses()
-        assertThat(expenses).hasSize(3)
-        assertThat(expenses[0].name).isEqualTo(Fixtures.ExpenseA().name)
-        assertThat(expenses[0].category.name).isEqualTo(Fixtures.ExpenseA().category.name)
+        val actual: List<Expense> = sut.getExpenses()
+        assertThat(actual).hasSize(3)
+        assertThat(actual[0].name).isEqualTo(Fixtures.ExpenseA().name)
+        assertThat(actual[0].category.name).isEqualTo(Fixtures.ExpenseA().category.name)
+    }
+
+    @Test
+    fun selectById() {
+        val actual = sut.getExpense(1)
+
+        assertThat(actual?.category?.name).isEqualTo("食費")
+        assertThat(actual?.name).isEqualTo(Fixtures.ExpenseA().name)
+        assertThat(actual?.date).isEqualTo(Fixtures.ExpenseA().date)
+    }
+
+    @Test
+    fun `selectById returns null`() {
+        val actual = sut.getExpense(10)
+        assertThat(actual).isNull()
+    }
+
+    @Test
+    fun addExpense() {
+        val actual = sut.addExpense(1, Fixtures.expenseRequestDtoA())
+        assertThat(actual.category.name).isEqualTo("食費")
+        assertThat(actual.name).isEqualTo(Fixtures.expenseRequestDtoA().name)
     }
 }

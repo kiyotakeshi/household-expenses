@@ -24,7 +24,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/expenseResponseDto'
-
+    post:
+      tags:
+        - 'expenses'
+      summary: '支出の登録'
+      description: '登録した支出を返す'
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/expenseRequestDto'
+      responses:
+        '201':
+          description: '正常'
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/expenseResponseDto'
+        '422':
+          description: 'validation error'
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/validation_error'
   # category
   /categories:
     get:
@@ -83,7 +105,48 @@ components:
           type: string
           format: date
           example: '2023-02-05'
-
+    expenseRequestDto:
+      type: object
+      required:
+        - category_id
+        - name
+        - price
+        - memo
+        - date
+        - repeatable_month
+        - repeatable_count
+      properties:
+        category_id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: '粉ミルク'
+        price:
+          type: integer
+          example: 500
+        memo:
+          type: string
+          example: '200gの缶のもの'
+          nullable: true
+        date:
+          type: string
+          format: date
+          example: 2022-11-22
+        repeatable_month:
+          type: integer
+          description: |
+            繰り返しの予定の何ヶ月ごとかを表すデータ
+            1ヶ月に1回だと **1** となる
+          example: 1
+          nullable: true
+        repeatable_count:
+          type: integer
+          description: |
+            繰り返しの予定の月あたりの回数を表すデータ
+            1ヶ月に1回だと **1** となる
+          example: 1
+          nullable: true
     # response
     expenseResponseDto:
       type: object
@@ -164,7 +227,7 @@ components:
         birthday:
           type: string
           format: date
-          example: '2022-05-15'
+          example: 2022-05-15
 
 
     validation_error:

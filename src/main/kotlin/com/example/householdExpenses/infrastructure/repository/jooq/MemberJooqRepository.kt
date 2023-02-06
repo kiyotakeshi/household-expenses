@@ -13,7 +13,7 @@ class MemberJooqRepository(private val create: DSLContext) : MemberRepository {
     override fun addMember(request: MemberRequestDto, userId: Int): Member {
         val m = MEMBERS.`as`("m")
 
-        val returningMember = create.insertInto(m,m.USER_ID, m.NAME, m.BIRTHDAY)
+        val returningMember = create.insertInto(m, m.USER_ID, m.NAME, m.BIRTHDAY)
             .values(userId, request.name, request.birthday)
             .returning()
             .first()
