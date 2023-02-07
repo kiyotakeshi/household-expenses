@@ -13,16 +13,11 @@
 					"name": "get expenses",
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "password",
-									"value": "1qazxsw2",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "user1@example.com",
+									"key": "token",
+									"value": "{{JWT}}",
 									"type": "string"
 								}
 							]
@@ -44,29 +39,80 @@
 					"response": []
 				},
 				{
-					"name": "get expenses with JWT",
+					"name": "add new expense",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlcjFAZXhhbXBsZS5jb20iLCJleHAiOjE2NzU1MTYxMTMsImlhdCI6MTY3NTQ4NzMxMywic2NvcGUiOiJST0xFX1VTRVIifQ.UDjoP7eh9uGlqGvyi86xLsd1wIWI7aJJb4Qmv7ri6dX8xp0rJ-WJ3MO8uWMI4SBqjiI7PZwn2kVChD1cMqW0ambc9sseB0AVCZ6yPOJRLypHK0b4DaDXerGUhf38LJcYxSPUb6W6Bs0fsAFeFr5sz8RTX-DiPDh7TGuU1LXnyi7HLbCMwzo5u4Qd5QcFqCsX0V_A0xJGtmwTPXxQYRKZ0LZ0svIFoc_3uveoX2ltfBDqhHYOPDbnUPjewNTTkzQrdkWfTzCtCsXJeqRBhr3y5PPamnEWQerr3EzVZpp-6JmWkwbgsa3zImPmRfjhICq36QGMF3C6oSuHK_i6xQdRig",
+									"value": "{{JWT}}",
 									"type": "string"
 								}
 							]
 						},
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"category_id\": 2,\n    \"name\": \"ガーゼ\",\n    \"price\": 600,\n    \"memo\": \"5枚セット\",\n    \"date\": \"2022-12-01\",\n    \"repeatable_month\": null,\n    \"repeatable_count\": null\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:{{PORT}}/api/expenses",
+							"raw": "localhost:{{PORT}}/api/expenses/members/1",
 							"host": [
 								"localhost"
 							],
 							"port": "{{PORT}}",
 							"path": [
 								"api",
-								"expenses"
+								"expenses",
+								"members",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Failure] add diferrent user new expense",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"category_id\": 2,\n    \"name\": \"ガーゼ\",\n    \"price\": 600,\n    \"memo\": \"5枚セット\",\n    \"date\": \"2022-12-01\",\n    \"repeatable_month\": null,\n    \"repeatable_count\": null\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{PORT}}/api/expenses/members/3",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"expenses",
+								"members",
+								"3"
 							]
 						}
 					},
@@ -81,16 +127,11 @@
 					"name": "get categories",
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "password",
-									"value": "1qazxsw2",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "user1@example.com",
+									"key": "token",
+									"value": "{{JWT}}",
 									"type": "string"
 								}
 							]
@@ -110,31 +151,45 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "member",
+			"item": [
 				{
-					"name": "get categories with JWT Copy",
+					"name": "add new member",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlcjFAZXhhbXBsZS5jb20iLCJleHAiOjE2NzU1OTgwOTMsImlhdCI6MTY3NTU2OTI5Mywic2NvcGUiOiJST0xFX1VTRVIifQ.mHd9rYja-4VXXU7J4hyc4JxAQRFRmywXzBt2ngl2C-Je51HoqV9NEzXTA6YuBLpPnz0yDIj2w1KrFGjjkICXmHTSzHRAM2a46dw9hLKDTy0gX5v1yGfobmmulbYm7cN4OH4CgZfAsZsidF_J962YY2T4-giutiBfWLuyitUDrSwLACSrRG0vmYyOhWdJ41Wzh8qvM3wnsf9-Wqe5gbx_iUjwV6arSEnj4YkWjXXmMksE5NaKza8uaxWN0pZiIRFTYMIeQgnwXnztTqfLeekcQ64BcrCtnipRyDM-nRaYqzvey4GQcC6xHE0G8TF9xDmtSIkEkMhIAT81YWPKGvODQQ",
+									"value": "{{JWT}}",
 									"type": "string"
 								}
 							]
 						},
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"mybaby2\",\n    \"birthday\": \"2023-02-05\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:{{PORT}}/api/categories",
+							"raw": "localhost:{{PORT}}/api/members",
 							"host": [
 								"localhost"
 							],
 							"port": "{{PORT}}",
 							"path": [
 								"api",
-								"categories"
+								"members"
 							]
 						}
 					},
@@ -221,6 +276,10 @@
 			"key": "PORT",
 			"value": "8089",
 			"type": "default"
+		},
+		{
+			"key": "JWT",
+			"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlcjFAZXhhbXBsZS5jb20iLCJleHAiOjE2NzU1OTgwOTMsImlhdCI6MTY3NTU2OTI5Mywic2NvcGUiOiJST0xFX1VTRVIifQ.mHd9rYja-4VXXU7J4hyc4JxAQRFRmywXzBt2ngl2C-Je51HoqV9NEzXTA6YuBLpPnz0yDIj2w1KrFGjjkICXmHTSzHRAM2a46dw9hLKDTy0gX5v1yGfobmmulbYm7cN4OH4CgZfAsZsidF_J962YY2T4-giutiBfWLuyitUDrSwLACSrRG0vmYyOhWdJ41Wzh8qvM3wnsf9-Wqe5gbx_iUjwV6arSEnj4YkWjXXmMksE5NaKza8uaxWN0pZiIRFTYMIeQgnwXnztTqfLeekcQ64BcrCtnipRyDM-nRaYqzvey4GQcC6xHE0G8TF9xDmtSIkEkMhIAT81YWPKGvODQQ"
 		}
 	]
 }

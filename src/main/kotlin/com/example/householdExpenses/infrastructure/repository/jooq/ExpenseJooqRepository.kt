@@ -42,8 +42,8 @@ class ExpenseJooqRepository(private val create: DSLContext) : ExpenseRepository 
                 price = it.getValue(e.PRICE)!!,
                 memo = it.getValue(e.MEMO),
                 date = it.getValue(e.DATE)!!,
-                repeatable_month = it.getValue(e.REPEATABLE_MONTH)!!,
-                repeatable_count = it.getValue(e.REPEATABLE_COUNT)!!
+                repeatable_month = it.getValue(e.REPEATABLE_MONTH),
+                repeatable_count = it.getValue(e.REPEATABLE_COUNT)
             )
         }.toList()
 
@@ -72,8 +72,8 @@ class ExpenseJooqRepository(private val create: DSLContext) : ExpenseRepository 
                 price = it.getValue(e.PRICE)!!,
                 memo = it.getValue(e.MEMO),
                 date = it.getValue(e.DATE)!!,
-                repeatable_month = it.getValue(e.REPEATABLE_MONTH)!!,
-                repeatable_count = it.getValue(e.REPEATABLE_COUNT)!!
+                repeatable_month = it.getValue(e.REPEATABLE_MONTH),
+                repeatable_count = it.getValue(e.REPEATABLE_COUNT)
             )
         }
     }

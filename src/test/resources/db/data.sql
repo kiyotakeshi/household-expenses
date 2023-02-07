@@ -18,6 +18,8 @@ values
     (2, 'admin@example.com', '$2a$10$KQmRCEZWRXSZpY3PqJT6GuuZYOi/TFUFxItmby8I8TZPCgTio4eh');
 
 insert into roles (id, name)
+-- 大文字かを区別
+-- com/example/householdExpenses/core/security/SecurityConfig.kt
 values (1, 'USER'),
        (2, 'ADMIN');
 

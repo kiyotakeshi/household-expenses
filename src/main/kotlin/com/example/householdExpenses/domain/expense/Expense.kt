@@ -8,7 +8,7 @@ import java.time.LocalDate
  */
 class Expense private constructor(
     id: Int?, category: Category, memberId: Int, name: String, price: Int, memo: String?,
-    date: LocalDate, repeatableMonth: Int, repeatableCount: Int
+    date: LocalDate, repeatableMonth: Int?, repeatableCount: Int?
 ) {
     var id: Int? = id
     val category: Category = category
@@ -30,7 +30,7 @@ class Expense private constructor(
         }
         fun reconstruct(
             id: Int, category: Category, member_id: Int, name: String, price: Int, memo: String?,
-            date: LocalDate, repeatable_month: Int, repeatable_count: Int
+            date: LocalDate, repeatable_month: Int?, repeatable_count: Int?
         ): Expense {
             return Expense(id, category, member_id, name, price, memo, date, repeatable_month, repeatable_count)
         }
