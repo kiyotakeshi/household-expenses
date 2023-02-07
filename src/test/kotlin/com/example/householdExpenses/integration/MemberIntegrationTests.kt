@@ -3,7 +3,6 @@ package com.example.householdExpenses.integration
 import com.example.householdExpenses.IntegrationTestUtils
 import com.example.householdExpenses.core.security.SecurityConfig
 import com.example.householdExpenses.domain.Fixtures
-import com.example.householdExpenses.model.MemberRequestDto
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -15,12 +14,7 @@ import org.springframework.http.MediaType
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*
 import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.post
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder
-import org.springframework.util.Base64Utils
-import org.springframework.web.servlet.function.RequestPredicates.contentType
-import java.time.LocalDate
 
 /**
  * @ref https://github.com/spring-projects/spring-security-samples/blob/main/servlet/spring-boot/java/jwt/login/src/test/java/example/web/HelloControllerTests.java

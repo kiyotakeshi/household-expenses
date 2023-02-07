@@ -1,7 +1,6 @@
 package com.example.householdExpenses.presentation.api
 
 import com.example.householdExpenses.core.security.SecurityConfig
-import com.example.householdExpenses.presentation.api.HelloWorldController
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

@@ -42,7 +42,7 @@ internal class ExpenseIntegrationTests @Autowired constructor(
                     contentType(MediaType.APPLICATION_JSON)
                 }
                 // ID は DB にて採番されるため
-                jsonPath("$[0].id") { value(1) }
+                jsonPath("$[0].id") { isNumber() }
                 jsonPath("$[0].name") { value(Fixtures.ExpenseA().name) }
                 jsonPath("$[0].price") { value(Fixtures.ExpenseA().price) }
                 jsonPath("$[0].memo") { value(Fixtures.ExpenseA().memo) }

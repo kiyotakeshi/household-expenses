@@ -6,7 +6,6 @@ import com.example.householdExpenses.domain.user.UserRepository
 import com.example.householdExpenses.model.ExpenseRequestDto
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
-import java.lang.RuntimeException
 
 /**
  * @author kiyota

@@ -39,6 +39,40 @@
 					"response": []
 				},
 				{
+					"name": "get expenses with Basic Authentication",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{USER1_PASSWORD}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{USER1_USERNAME}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:{{PORT}}/api/expenses",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"expenses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "add new expense",
 					"request": {
 						"auth": {
@@ -132,6 +166,40 @@
 								{
 									"key": "token",
 									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:{{PORT}}/api/categories",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get categories with Basic Authentication",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{USER1_PASSWORD}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{USER1_USERNAME}}",
 									"type": "string"
 								}
 							]
@@ -280,6 +348,14 @@
 		{
 			"key": "JWT",
 			"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlcjFAZXhhbXBsZS5jb20iLCJleHAiOjE2NzU1OTgwOTMsImlhdCI6MTY3NTU2OTI5Mywic2NvcGUiOiJST0xFX1VTRVIifQ.mHd9rYja-4VXXU7J4hyc4JxAQRFRmywXzBt2ngl2C-Je51HoqV9NEzXTA6YuBLpPnz0yDIj2w1KrFGjjkICXmHTSzHRAM2a46dw9hLKDTy0gX5v1yGfobmmulbYm7cN4OH4CgZfAsZsidF_J962YY2T4-giutiBfWLuyitUDrSwLACSrRG0vmYyOhWdJ41Wzh8qvM3wnsf9-Wqe5gbx_iUjwV6arSEnj4YkWjXXmMksE5NaKza8uaxWN0pZiIRFTYMIeQgnwXnztTqfLeekcQ64BcrCtnipRyDM-nRaYqzvey4GQcC6xHE0G8TF9xDmtSIkEkMhIAT81YWPKGvODQQ"
+		},
+		{
+			"key": "USER1_USERNAME",
+			"value": "user1@example.com"
+		},
+		{
+			"key": "USER1_PASSWORD",
+			"value": "1qazxsw2"
 		}
 	]
 }

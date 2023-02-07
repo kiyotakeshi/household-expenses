@@ -1,9 +1,6 @@
 package com.example.householdExpenses.infrastructure.repository.jooq
 
-import com.example.householdExpenses.domain.user.User
 import com.example.householdExpenses.model.MemberRequestDto
-import org.assertj.core.api.Assertions
-import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jooq.JooqTest
