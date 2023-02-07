@@ -18,7 +18,7 @@ class CustomUserDetails(
 ) : UserDetailsService {
 
     override fun loadUserByUsername(email: String): UserDetails {
-        val user = userRepository.getUser(email) ?: throw UsernameNotFoundException("user details not found for the user: $email")
+        val user = userRepository.getUser(email)
 
         val authorities: MutableList<GrantedAuthority> = ArrayList()
         user.roles?.map {

@@ -19,6 +19,6 @@ internal class MemberJooqRepositoryTests(@Autowired private val sut: MemberJooqR
     internal fun add() {
         val member = MemberRequestDto("baby1", LocalDate.of(2023, 2, 5))
         val userId = 1
-        val actual = sut.addMember(member, userId)
+        sut.addMember(member, userId)
     }
 }

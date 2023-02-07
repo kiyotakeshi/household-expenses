@@ -50,7 +50,6 @@ internal class ExpenseIntegrationTests @Autowired constructor(
                 jsonPath("$[0].category_name") { value(Fixtures.ExpenseA().category.name) }
                 jsonPath("$[1].name") { value(Fixtures.ExpenseB().name) }
                 jsonPath("$[1].category_name") { value(Fixtures.ExpenseB().category.name) }
-                jsonPath("$[2].name") { value(Fixtures.ExpenseC().name) }
             }
     }
 

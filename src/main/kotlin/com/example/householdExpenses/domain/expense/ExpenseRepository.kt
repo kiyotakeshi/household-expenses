@@ -7,6 +7,6 @@ import com.example.householdExpenses.model.ExpenseRequestDto
  */
 interface ExpenseRepository {
     fun getExpenses(userId: Int): List<Expense>
-    fun getExpense(id:Int): Expense?
+    fun getExpense(id:Int): Expense
     fun addExpense(memberId: Int,request: ExpenseRequestDto): Expense
 }

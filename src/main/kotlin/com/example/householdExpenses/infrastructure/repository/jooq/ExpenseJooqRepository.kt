@@ -14,6 +14,7 @@ import org.jooq.DSLContext
 import org.jooq.Record
 import org.jooq.Result
 import org.springframework.stereotype.Repository
+import java.lang.RuntimeException
 
 @Repository
 class ExpenseJooqRepository(private val create: DSLContext) : ExpenseRepository {
@@ -36,49 +37,49 @@ class ExpenseJooqRepository(private val create: DSLContext) : ExpenseRepository 
 
         val expenses = records.map {
             Expense.reconstruct(
-                id = it.getValue(e.ID)!!,
+                id = it[e.ID]!!,
                 category = Category.reconstruct(
-                    id = it.getValue(c.ID)!!,
-                    name = it.getValue(c.NAME)!!,
-                    rank = it.getValue(c.RANK)!!
+                    id = it[c.ID]!!,
+                    name = it[c.NAME]!!,
+                    rank = it[c.RANK]!!
                 ),
-                member_id = it.getValue(e.MEMBER_ID)!!,
-                name = it.getValue(e.NAME)!!,
-                price = it.getValue(e.PRICE)!!,
-                memo = it.getValue(e.MEMO),
-                date = it.getValue(e.DATE)!!,
-                repeatable_month = it.getValue(e.REPEATABLE_MONTH),
-                repeatable_count = it.getValue(e.REPEATABLE_COUNT)
+                member_id = it[e.MEMBER_ID]!!,
+                name = it[e.NAME]!!,
+                price = it[e.PRICE]!!,
+                memo = it[e.MEMO],
+                date = it[e.DATE]!!,
+                repeatable_month = it[e.REPEATABLE_MONTH],
+                repeatable_count = it[e.REPEATABLE_COUNT]
             )
         }.toList()
 
         return expenses
     }
 
-    override fun getExpense(id: Int): Expense? {
+    override fun getExpense(id: Int): Expense {
 
         val record: Record = create.selectFrom(
             e.leftOuterJoin(c)
                 .on(e.CATEGORY_ID.eq(c.ID))
         )
             .where(e.ID.eq(id))
-            .fetchOne() ?: return null
+            .fetchOne() ?: throw RuntimeException("expense not found: id($id)")
 
         return record.map {
             Expense.reconstruct(
-                id = it.getValue(e.ID)!!,
+                id = it[e.ID]!!,
                 category = Category.reconstruct(
-                    id = it.getValue(c.ID)!!,
-                    name = it.getValue(c.NAME)!!,
-                    rank = it.getValue(c.RANK)!!
+                    id = it[c.ID]!!,
+                    name = it[c.NAME]!!,
+                    rank = it[c.RANK]!!
                 ),
-                member_id = it.getValue(e.MEMBER_ID)!!,
-                name = it.getValue(e.NAME)!!,
-                price = it.getValue(e.PRICE)!!,
-                memo = it.getValue(e.MEMO),
-                date = it.getValue(e.DATE)!!,
-                repeatable_month = it.getValue(e.REPEATABLE_MONTH),
-                repeatable_count = it.getValue(e.REPEATABLE_COUNT)
+                member_id = it[e.MEMBER_ID]!!,
+                name = it[e.NAME]!!,
+                price = it[e.PRICE]!!,
+                memo = it[e.MEMO],
+                date = it[e.DATE]!!,
+                repeatable_month = it[e.REPEATABLE_MONTH],
+                repeatable_count = it[e.REPEATABLE_COUNT]
             )
         }
     }
@@ -99,6 +100,6 @@ class ExpenseJooqRepository(private val create: DSLContext) : ExpenseRepository 
             .returning()
             .first()
 
-        return this.getExpense(returningExpense[e.ID]!!)!!
+        return this.getExpense(returningExpense[e.ID]!!)
     }
 }

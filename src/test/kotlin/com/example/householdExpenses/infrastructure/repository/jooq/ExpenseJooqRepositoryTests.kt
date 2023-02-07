@@ -3,6 +3,8 @@ package com.example.householdExpenses.infrastructure.repository.jooq
 import com.example.householdExpenses.domain.Fixtures
 import com.example.householdExpenses.domain.expense.Expense
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jooq.JooqTest
@@ -29,15 +31,18 @@ internal class ExpenseJooqRepositoryTests(@Autowired private val sut: ExpenseJoo
     fun selectById() {
         val actual = sut.getExpense(1)
 
-        assertThat(actual?.category?.name).isEqualTo("食費")
-        assertThat(actual?.name).isEqualTo(Fixtures.ExpenseA().name)
-        assertThat(actual?.date).isEqualTo(Fixtures.ExpenseA().date)
+        assertThat(actual.category.name).isEqualTo("食費")
+        assertThat(actual.name).isEqualTo(Fixtures.ExpenseA().name)
+        assertThat(actual.date).isEqualTo(Fixtures.ExpenseA().date)
     }
 
     @Test
-    fun `selectById returns null`() {
-        val actual = sut.getExpense(10)
-        assertThat(actual).isNull()
+    fun `selectById throw exception`() {
+        val notExitsId = 1000
+        assertThatThrownBy {
+            sut.getExpense(notExitsId)
+        }.isInstanceOf(RuntimeException::class.java)
+            .hasMessageContaining("expense not found: id($notExitsId)")
     }
 
     @Test

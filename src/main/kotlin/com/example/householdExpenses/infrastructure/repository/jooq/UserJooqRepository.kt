@@ -10,6 +10,7 @@ import org.jooq.DSLContext
 import org.jooq.Record
 import org.jooq.Result
 import org.springframework.stereotype.Repository
+import java.lang.RuntimeException
 
 @Repository
 class UserJooqRepository(private val create: DSLContext) : UserRepository {
@@ -19,7 +20,7 @@ class UserJooqRepository(private val create: DSLContext) : UserRepository {
     val ur = USERS_ROLES.`as`("ur")
     val m = MEMBERS.`as`("m")
 
-    override fun getUser(email: String): User? {
+    override fun getUser(email: String): User {
 
         val result: Result<Record> = create.select()
             .from(u)
@@ -31,7 +32,7 @@ class UserJooqRepository(private val create: DSLContext) : UserRepository {
             .fetch()
 
         if (result.isEmpty()) {
-            return null
+            throw RuntimeException("user not found: email($email)")
         }
 
         val roles = result.map { it[r.NAME] }.toSet()
