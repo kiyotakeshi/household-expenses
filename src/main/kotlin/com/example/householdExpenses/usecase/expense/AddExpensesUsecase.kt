@@ -3,22 +3,21 @@ package com.example.householdExpenses.usecase.expense
 import com.example.householdExpenses.domain.expense.Expense
 import com.example.householdExpenses.domain.expense.ExpenseRepository
 import com.example.householdExpenses.domain.user.UserRepository
+import com.example.householdExpenses.model.ExpenseRequestDto
 import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
 
 /**
  * @author kiyota
  */
 @Service
-class GetExpensesUsecase(
+class AddExpensesUsecase(
     private val expenseRepository: ExpenseRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
 ) {
-
-    fun getExpenses(): List<Expense> {
+    fun addExpense(memberId: Int, request: ExpenseRequestDto): Expense {
         val authentication = SecurityContextHolder.getContext().authentication
-        val user = userRepository.getUser(authentication.name) ?: throw UsernameNotFoundException("user details not found for the user: ${authentication.name}")
-        return this.expenseRepository.getExpenses(user.id!!)
+        userRepository.hasMember(authentication.name, memberId) || throw RuntimeException("user(${authentication.name}) doesn't have specified member (id:$memberId)")
+        return this.expenseRepository.addExpense(memberId,request)
     }
 }

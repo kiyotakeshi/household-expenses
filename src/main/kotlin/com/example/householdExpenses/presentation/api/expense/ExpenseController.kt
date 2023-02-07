@@ -1,20 +1,25 @@
 package com.example.householdExpenses.presentation.api.expense
 
 import com.example.householdExpenses.domain.expense.Expense
+import com.example.householdExpenses.model.ExpenseRequestDto
 import com.example.householdExpenses.model.ExpenseResponseDto
+import com.example.householdExpenses.usecase.expense.AddExpensesUsecase
 import com.example.householdExpenses.usecase.expense.GetExpensesUsecase
+import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 /**
  * @author kiyota
  */
 @RestController
 @RequestMapping("/api/expenses")
-class ExpenseController(private val getExpensesUsecase: GetExpensesUsecase) {
+class ExpenseController(
+    private val getExpensesUsecase: GetExpensesUsecase,
+    private val addExpensesUsecase: AddExpensesUsecase,
+) {
 
+    // TODO: member でも絞ったほうがいいかも
     @GetMapping
     fun getExpenses(): ResponseEntity<List<ExpenseResponseDto>> {
         val expenses: List<Expense> = getExpensesUsecase.getExpenses()
@@ -33,5 +38,25 @@ class ExpenseController(private val getExpensesUsecase: GetExpensesUsecase) {
         }.toList()
 
         return ResponseEntity.ok(response)
+    }
+
+    @PostMapping("/members/{memberId}")
+    fun addExpense(
+        @PathVariable memberId: Int,
+        @Valid @RequestBody request: ExpenseRequestDto,
+    ): ResponseEntity<ExpenseResponseDto> {
+        val expense = addExpensesUsecase.addExpense(memberId, request)
+        return ResponseEntity.ok(
+            ExpenseResponseDto(
+                expense.id!!,
+                expense.category.name,
+                expense.name,
+                expense.price,
+                expense.memo,
+                expense.date,
+                expense.repeatableMonth,
+                expense.repeatableCount
+            )
+        )
     }
 }

@@ -34,14 +34,4 @@ internal class CustomUserDetailsTests {
         val authorities = listOf(SimpleGrantedAuthority("ROLE_ADMIN"), SimpleGrantedAuthority("ROLE_USER"))
         assertThat(actual.authorities).containsAll(authorities)
     }
-
-    @Test
-    internal fun `user not found`() {
-        val email = "admin@example.com"
-        every { userRepository.getUser(any()) } returns null
-        assertThatThrownBy {
-            sut.loadUserByUsername(email)
-        }.isInstanceOf(UsernameNotFoundException::class.java)
-            .hasMessageContaining("user details not found for the user: $email")
-    }
 }

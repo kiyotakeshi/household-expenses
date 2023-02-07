@@ -3,7 +3,6 @@ package com.example.householdExpenses.usecase.member
 import com.example.householdExpenses.domain.Fixtures
 import com.example.householdExpenses.domain.member.MemberRepository
 import com.example.householdExpenses.domain.user.UserRepository
-import com.example.householdExpenses.model.MemberRequestDto
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkStatic
@@ -11,7 +10,6 @@ import io.mockk.verify
 import org.junit.jupiter.api.Test
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
-import java.time.LocalDate
 
 /**
  * @author kiyota
@@ -23,7 +21,7 @@ internal class AddMemberUsecaseTests {
     private val sut = AddMemberUsecase(memberRepository, userRepository)
 
     @Test
-    fun `should call its repository to retrieve expenses`() {
+    fun `should call its repository to add member`() {
         val userName = "user1@example.com"
         every { authentication.name } returns userName
         mockkStatic(SecurityContextHolder::class)

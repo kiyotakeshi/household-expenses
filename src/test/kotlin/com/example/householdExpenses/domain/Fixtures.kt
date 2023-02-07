@@ -3,6 +3,7 @@ package com.example.householdExpenses.domain
 import com.example.householdExpenses.domain.category.Category
 import com.example.householdExpenses.domain.expense.Expense
 import com.example.householdExpenses.domain.user.User
+import com.example.householdExpenses.model.ExpenseRequestDto
 import com.example.householdExpenses.model.MemberRequestDto
 import java.time.LocalDate
 
@@ -47,6 +48,10 @@ class Fixtures {
 
         fun memberRequestDtoA(): MemberRequestDto {
             return MemberRequestDto("baby1", LocalDate.of(2023, 2, 5))
+        }
+
+        fun expenseRequestDtoA(): ExpenseRequestDto {
+            return ExpenseRequestDto(1, "粉ミルク", 500, "200gの缶のもの", LocalDate.of(2022, 11, 22), 1, 1)
         }
     }
 }

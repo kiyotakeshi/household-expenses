@@ -55,6 +55,8 @@ flyway {
 	url = "jdbc:postgresql://localhost:5432/household-expenses"
 	user = "postgres"
 	password = "password"
+	// $ ./gradlew flywayClean -Pflyway.cleanDisabled=false
+ 	// cleanDisabled = false
 }
 
 jooq {

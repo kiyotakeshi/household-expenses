@@ -1,9 +1,6 @@
 package com.example.householdExpenses.infrastructure.repository.jooq
 
-import com.example.householdExpenses.domain.user.User
 import com.example.householdExpenses.model.MemberRequestDto
-import org.assertj.core.api.Assertions
-import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jooq.JooqTest
@@ -22,6 +19,6 @@ internal class MemberJooqRepositoryTests(@Autowired private val sut: MemberJooqR
     internal fun add() {
         val member = MemberRequestDto("baby1", LocalDate.of(2023, 2, 5))
         val userId = 1
-        val actual = sut.addMember(member, userId)
+        sut.addMember(member, userId)
     }
 }

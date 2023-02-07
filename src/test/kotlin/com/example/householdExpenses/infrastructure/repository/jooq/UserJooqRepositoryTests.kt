@@ -30,4 +30,25 @@ internal class UserJooqRepositoryTests(@Autowired private val sut: UserJooqRepos
         assertThat(actual?.id).isEqualTo(1)
         assertThat(actual?.roles).contains("USER")
     }
+
+    @Test
+    internal fun `getUser throw exception`() {
+        val email = "not-found1-user@example.com"
+        assertThatThrownBy {
+            sut.getUser(email)
+        }.isInstanceOf(RuntimeException::class.java)
+            .hasMessageContaining("user not found: email($email)")
+    }
+
+    @Test
+    internal fun hasMember() {
+        val actual = sut.hasMember("user1@example.com", 1)
+        assertThat(actual).isTrue
+    }
+
+    @Test
+    internal fun `hasMember returns false`() {
+        val actual = sut.hasMember("user1@example.com", 3)
+        assertThat(actual).isFalse
+    }
 }

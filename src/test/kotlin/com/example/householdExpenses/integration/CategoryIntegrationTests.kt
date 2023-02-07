@@ -13,7 +13,6 @@ import org.springframework.http.MediaType
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
-import org.springframework.test.web.servlet.post
 
 /**
  * @ref https://github.com/spring-projects/spring-security-samples/blob/main/servlet/spring-boot/java/jwt/login/src/test/java/example/web/HelloControllerTests.java
@@ -40,7 +39,6 @@ internal class CategoryIntegrationTests @Autowired constructor(
                 content {
                     contentType(MediaType.APPLICATION_JSON)
                 }
-                // ID は DB にて採番されるため
                 jsonPath("$[0].id") { value(1) }
                 jsonPath("$[0].name") { value(Fixtures.CategoryA().name) }
                 jsonPath("$[0].rank") { value(Fixtures.CategoryA().rank) }
@@ -59,6 +57,14 @@ internal class CategoryIntegrationTests @Autowired constructor(
             .andDo { print() }
             .andExpect {
                 status { isOk() }
+                content {
+                    contentType(MediaType.APPLICATION_JSON)
+                }
+                // ID は DB にて採番されるため
+                jsonPath("$[0].id") { isNumber() }
+                jsonPath("$[0].name") { value(Fixtures.CategoryA().name) }
+                jsonPath("$[0].rank") { value(Fixtures.CategoryA().rank) }
+                jsonPath("$[1].name") { value(Fixtures.CategoryB().name) }
             }
     }
 
